@@ -62,18 +62,22 @@ export default function Index() {
         </div>
 
         {/* Email/Password Login Link */}
-        <p className="text-white text-xl font-thin italic mb-2 text-center drop-shadow-md" style={{ 
-          fontFamily: 'Montserrat',
-          textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
-          WebkitTextStroke: '1px white'
-        }}>
-          Iniciar con correo y contraseña
-        </p>
+        <Link to="/login">
+          <p className="text-white text-xl font-thin italic mb-2 text-center drop-shadow-md hover:underline cursor-pointer" style={{
+            fontFamily: 'Montserrat',
+            textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
+            WebkitTextStroke: '1px white'
+          }}>
+            Iniciar con correo y contraseña
+          </p>
+        </Link>
 
         {/* Password Recovery Link */}
-        <p className="text-white text-xl font-bold italic text-center" style={{ fontFamily: 'Montserrat' }}>
-          Recuperar contraseña aqui
-        </p>
+        <Link to="/recuperar-contrasena">
+          <p className="text-white text-xl font-bold italic text-center hover:underline cursor-pointer" style={{ fontFamily: 'Montserrat' }}>
+            Recuperar contraseña aqui
+          </p>
+        </Link>
       </div>
     </div>
   );
