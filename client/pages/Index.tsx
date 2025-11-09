@@ -1,6 +1,18 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Index() {
+  const navigate = useNavigate();
+
+  const handleSocialLogin = (provider: string) => {
+    // Simulate social login - in production, this would use actual OAuth
+    console.log(`Logging in with ${provider}...`);
+
+    // Simulate a brief delay for the authentication process
+    setTimeout(() => {
+      navigate("/menu");
+    }, 800);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-partgo-red via-partgo-orange to-partgo-yellow flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md flex flex-col items-center">
@@ -25,7 +37,10 @@ export default function Index() {
         {/* Social Login Buttons */}
         <div className="w-full max-w-[318px] space-y-4 mb-6">
           {/* Google Button */}
-          <button className="w-full h-16 bg-white rounded-2xl flex items-center px-4 shadow-md hover:shadow-lg transition-shadow">
+          <button
+            onClick={() => handleSocialLogin("Google")}
+            className="w-full h-16 bg-white rounded-2xl flex items-center px-4 shadow-md hover:shadow-lg transition-shadow active:scale-95"
+          >
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/b96a9b104a1e350f30c1643a22e3707b8281a512?width=90"
               alt="Google"
@@ -37,7 +52,10 @@ export default function Index() {
           </button>
 
           {/* Apple Button */}
-          <button className="w-full h-16 bg-white rounded-2xl flex items-center px-4 shadow-md hover:shadow-lg transition-shadow">
+          <button
+            onClick={() => handleSocialLogin("Apple")}
+            className="w-full h-16 bg-white rounded-2xl flex items-center px-4 shadow-md hover:shadow-lg transition-shadow active:scale-95"
+          >
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/98a17f6a45d1a7d35457f203bf501994c918f31a?width=76"
               alt="Apple"
@@ -49,7 +67,10 @@ export default function Index() {
           </button>
 
           {/* Facebook Button */}
-          <button className="w-full h-16 bg-[#3b5998] rounded-2xl flex items-center px-2 shadow-md hover:shadow-lg transition-shadow relative">
+          <button
+            onClick={() => handleSocialLogin("Facebook")}
+            className="w-full h-16 bg-[#3b5998] rounded-2xl flex items-center px-2 shadow-md hover:shadow-lg transition-shadow relative active:scale-95"
+          >
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/147651da3d86458d12e12fea6829da748681f21c?width=94"
               alt="Facebook"
