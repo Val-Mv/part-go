@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-partgo-red via-partgo-orange to-partgo-yellow flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
         <div className="w-full flex items-center justify-between mb-12">

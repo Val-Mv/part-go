@@ -113,6 +113,13 @@
     font-family: 'Montserrat', -apple-system, Roboto, Helvetica, sans-serif;
   }
 
+  .bg-partgo-hero {
+    background-image: url('https://cdn.builder.io/api/v1/image/assets%2F343e950f5ef34d4b9b0833007fadef2a%2Ffe47803666644ef5a71ec1ed4b994e35?format=webp&width=800');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
     overflow-wrap: anywhere;
     word-break: break-word;

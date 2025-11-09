@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Socio() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-partgo-red via-partgo-orange to-partgo-yellow flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-md text-center">
         <h1 className="text-white text-4xl font-semibold mb-4" style={{ fontFamily: 'Montserrat' }}>
           MODO SOCIO
