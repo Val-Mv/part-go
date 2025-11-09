@@ -57,6 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        partgo: {
+          orange: "hsl(var(--partgo-orange))",
+          red: "hsl(var(--partgo-red))",
+          yellow: "hsl(var(--partgo-yellow))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
