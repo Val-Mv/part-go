@@ -21,7 +21,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/recuperar-contrasena" element={<RecuperarContrasena />} />
+          <Route
+            path="/recuperar-contrasena"
+            element={<RecuperarContrasena />}
+          />
           <Route path="/menu" element={<Menu />} />
           <Route path="/socio" element={<Socio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

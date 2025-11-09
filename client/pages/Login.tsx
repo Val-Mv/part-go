@@ -38,19 +38,23 @@ export default function Login() {
         </div>
 
         {/* Acceder Title */}
-        <h1 
-          className="text-white text-center text-4xl md:text-5xl font-normal italic mb-8 drop-shadow-lg" 
-          style={{ 
-            fontFamily: 'Montserrat, -apple-system, Roboto, Helvetica, sans-serif',
-            textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
-            WebkitTextStroke: '1px white'
+        <h1
+          className="text-white text-center text-4xl md:text-5xl font-normal italic mb-8 drop-shadow-lg"
+          style={{
+            fontFamily:
+              "Montserrat, -apple-system, Roboto, Helvetica, sans-serif",
+            textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
+            WebkitTextStroke: "1px white",
           }}
         >
           Acceder
         </h1>
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="w-full max-w-[318px] space-y-4 mb-6">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-[318px] space-y-4 mb-6"
+        >
           {/* Email Input */}
           <div>
             <input
@@ -59,7 +63,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full h-14 px-5 rounded-2xl text-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-white"
-              style={{ fontFamily: 'Montserrat' }}
+              style={{ fontFamily: "Montserrat" }}
             />
           </div>
 
@@ -71,13 +75,16 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full h-14 px-5 rounded-2xl text-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-white"
-              style={{ fontFamily: 'Montserrat' }}
+              style={{ fontFamily: "Montserrat" }}
             />
           </div>
 
           {/* Error Message */}
           {error && (
-            <p className="text-white text-center font-semibold" style={{ fontFamily: 'Montserrat' }}>
+            <p
+              className="text-white text-center font-semibold"
+              style={{ fontFamily: "Montserrat" }}
+            >
               {error}
             </p>
           )}
@@ -87,7 +94,10 @@ export default function Login() {
             type="submit"
             className="w-full h-16 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow"
           >
-            <span className="text-black text-2xl font-semibold text-center" style={{ fontFamily: 'Montserrat' }}>
+            <span
+              className="text-black text-2xl font-semibold text-center"
+              style={{ fontFamily: "Montserrat" }}
+            >
               INGRESAR
             </span>
           </button>
@@ -95,14 +105,20 @@ export default function Login() {
 
         {/* Password Recovery Link */}
         <Link to="/recuperar-contrasena">
-          <p className="text-white text-xl font-bold italic text-center mb-4 hover:underline" style={{ fontFamily: 'Montserrat' }}>
+          <p
+            className="text-white text-xl font-bold italic text-center mb-4 hover:underline"
+            style={{ fontFamily: "Montserrat" }}
+          >
             Recuperar contraseña aqui
           </p>
         </Link>
 
         {/* Back to Social Login */}
         <Link to="/">
-          <p className="text-white text-lg font-normal italic text-center hover:underline" style={{ fontFamily: 'Montserrat' }}>
+          <p
+            className="text-white text-lg font-normal italic text-center hover:underline"
+            style={{ fontFamily: "Montserrat" }}
+          >
             ← Volver a opciones de inicio
           </p>
         </Link>

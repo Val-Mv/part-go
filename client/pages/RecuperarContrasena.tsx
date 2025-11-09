@@ -37,20 +37,30 @@ export default function RecuperarContrasena() {
         </div>
 
         {/* Title */}
-        <h1 
-          className="text-white text-center text-3xl md:text-4xl font-bold italic mb-4 drop-shadow-lg" 
-          style={{ fontFamily: 'Montserrat, -apple-system, Roboto, Helvetica, sans-serif' }}
+        <h1
+          className="text-white text-center text-3xl md:text-4xl font-bold italic mb-4 drop-shadow-lg"
+          style={{
+            fontFamily:
+              "Montserrat, -apple-system, Roboto, Helvetica, sans-serif",
+          }}
         >
           Recuperar Contraseña
         </h1>
 
         {!sent ? (
           <>
-            <p className="text-white text-lg text-center mb-8" style={{ fontFamily: 'Montserrat' }}>
-              Ingresa tu correo electrónico para recibir instrucciones de recuperación
+            <p
+              className="text-white text-lg text-center mb-8"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              Ingresa tu correo electrónico para recibir instrucciones de
+              recuperación
             </p>
 
-            <form onSubmit={handleSubmit} className="w-full max-w-[318px] space-y-4 mb-6">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full max-w-[318px] space-y-4 mb-6"
+            >
               <div>
                 <input
                   type="email"
@@ -58,12 +68,15 @@ export default function RecuperarContrasena() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full h-14 px-5 rounded-2xl text-lg bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-white"
-                  style={{ fontFamily: 'Montserrat' }}
+                  style={{ fontFamily: "Montserrat" }}
                 />
               </div>
 
               {error && (
-                <p className="text-white text-center font-semibold" style={{ fontFamily: 'Montserrat' }}>
+                <p
+                  className="text-white text-center font-semibold"
+                  style={{ fontFamily: "Montserrat" }}
+                >
                   {error}
                 </p>
               )}
@@ -72,7 +85,10 @@ export default function RecuperarContrasena() {
                 type="submit"
                 className="w-full h-16 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow"
               >
-                <span className="text-black text-2xl font-semibold text-center" style={{ fontFamily: 'Montserrat' }}>
+                <span
+                  className="text-black text-2xl font-semibold text-center"
+                  style={{ fontFamily: "Montserrat" }}
+                >
                   ENVIAR
                 </span>
               </button>
@@ -80,14 +96,20 @@ export default function RecuperarContrasena() {
           </>
         ) : (
           <div className="w-full max-w-[318px] text-center mb-8">
-            <p className="text-white text-xl mb-6" style={{ fontFamily: 'Montserrat' }}>
+            <p
+              className="text-white text-xl mb-6"
+              style={{ fontFamily: "Montserrat" }}
+            >
               ✓ Hemos enviado las instrucciones a tu correo electrónico
             </p>
           </div>
         )}
 
         <Link to="/">
-          <p className="text-white text-lg font-normal italic text-center hover:underline" style={{ fontFamily: 'Montserrat' }}>
+          <p
+            className="text-white text-lg font-normal italic text-center hover:underline"
+            style={{ fontFamily: "Montserrat" }}
+          >
             ← Volver al inicio
           </p>
         </Link>

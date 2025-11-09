@@ -26,11 +26,15 @@ export default function Index() {
         </div>
 
         {/* Acceder Title */}
-        <h1 className="text-white text-center text-4xl md:text-5xl font-normal italic mb-12 drop-shadow-lg" style={{ 
-          fontFamily: 'Montserrat, -apple-system, Roboto, Helvetica, sans-serif',
-          textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
-          WebkitTextStroke: '1px white'
-        }}>
+        <h1
+          className="text-white text-center text-4xl md:text-5xl font-normal italic mb-12 drop-shadow-lg"
+          style={{
+            fontFamily:
+              "Montserrat, -apple-system, Roboto, Helvetica, sans-serif",
+            textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
+            WebkitTextStroke: "1px white",
+          }}
+        >
           Acceder
         </h1>
 
@@ -46,7 +50,10 @@ export default function Index() {
               alt="Google"
               className="w-11 h-11"
             />
-            <span className="flex-1 text-black text-2xl font-medium italic text-center" style={{ fontFamily: 'Montserrat' }}>
+            <span
+              className="flex-1 text-black text-2xl font-medium italic text-center"
+              style={{ fontFamily: "Montserrat" }}
+            >
               GOOGLE
             </span>
           </button>
@@ -61,7 +68,10 @@ export default function Index() {
               alt="Apple"
               className="w-10 h-12"
             />
-            <span className="flex-1 text-black text-2xl font-medium italic text-center" style={{ fontFamily: 'Montserrat' }}>
+            <span
+              className="flex-1 text-black text-2xl font-medium italic text-center"
+              style={{ fontFamily: "Montserrat" }}
+            >
               APPLE
             </span>
           </button>
@@ -76,7 +86,10 @@ export default function Index() {
               alt="Facebook"
               className="w-12 h-12"
             />
-            <span className="flex-1 text-white text-2xl font-medium italic text-center" style={{ fontFamily: 'Montserrat' }}>
+            <span
+              className="flex-1 text-white text-2xl font-medium italic text-center"
+              style={{ fontFamily: "Montserrat" }}
+            >
               FACEBOOK
             </span>
           </button>
@@ -84,18 +97,24 @@ export default function Index() {
 
         {/* Email/Password Login Link */}
         <Link to="/login">
-          <p className="text-white text-xl font-thin italic mb-2 text-center drop-shadow-md hover:underline cursor-pointer" style={{
-            fontFamily: 'Montserrat',
-            textShadow: '0 4px 4px rgba(0, 0, 0, 0.25)',
-            WebkitTextStroke: '1px white'
-          }}>
+          <p
+            className="text-white text-xl font-thin italic mb-2 text-center drop-shadow-md hover:underline cursor-pointer"
+            style={{
+              fontFamily: "Montserrat",
+              textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
+              WebkitTextStroke: "1px white",
+            }}
+          >
             Iniciar con correo y contraseña
           </p>
         </Link>
 
         {/* Password Recovery Link */}
         <Link to="/recuperar-contrasena">
-          <p className="text-white text-xl font-bold italic text-center hover:underline cursor-pointer" style={{ fontFamily: 'Montserrat' }}>
+          <p
+            className="text-white text-xl font-bold italic text-center hover:underline cursor-pointer"
+            style={{ fontFamily: "Montserrat" }}
+          >
             Recuperar contraseña aqui
           </p>
         </Link>
