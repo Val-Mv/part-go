@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Login from "./pages/Login";
 import RecuperarContrasena from "./pages/RecuperarContrasena";
 import Menu from "./pages/Menu";
+import Perfil from "./pages/Perfil";
 import Socio from "./pages/Socio";
 import NotFound from "./pages/NotFound";
 

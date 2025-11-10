@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, Settings } from "lucide-react";
+import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
 
 export default function Menu() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [userName, setUserName] = useState("ALEX MANCIPE");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const profile = getUserProfile();
+    if (profile && profile.nombre) {
+      setUserName(profile.nombre.toUpperCase());
+    }
+  }, []);
+
   const handleLogout = () => {
-    // Simulate logout
+    clearUserProfile();
     setShowProfileMenu(false);
     navigate("/");
   };
@@ -123,13 +131,19 @@ export default function Menu() {
                 className="text-[#E32712] text-center text-lg font-semibold mb-6"
                 style={{ fontFamily: "Montserrat" }}
               >
-                ALEX MANCIPE
+                {userName}
               </h2>
 
               {/* Menu Options */}
               <div className="space-y-4">
                 {/* Perfil */}
-                <button className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                <button
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    navigate("/perfil");
+                  }}
+                  className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                >
                   <div className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
                     style={{
                       backgroundImage:
