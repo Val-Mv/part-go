@@ -27,6 +27,7 @@ const App = () => (
             element={<RecuperarContrasena />}
           />
           <Route path="/menu" element={<Menu />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/socio" element={<Socio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
