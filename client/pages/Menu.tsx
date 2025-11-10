@@ -1,8 +1,19 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { User, Settings } from "lucide-react";
 
 export default function Menu() {
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Simulate logout
+    setShowProfileMenu(false);
+    navigate("/");
+  };
+
   return (
-    <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
         <div className="w-full flex items-center justify-between mb-12">
@@ -16,13 +27,14 @@ export default function Menu() {
           >
             MENU
           </h1>
-          <div
-            className="w-16 h-16 rounded-full border-2 border-white bg-cover bg-center flex-shrink-0"
+          <button
+            onClick={() => setShowProfileMenu(!showProfileMenu)}
+            className="w-16 h-16 rounded-full border-2 border-white bg-cover bg-center flex-shrink-0 hover:scale-105 transition-transform"
             style={{
               backgroundImage:
                 "url('https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138')",
             }}
-          ></div>
+          ></button>
         </div>
 
         {/* Main Action Circles */}
@@ -82,6 +94,92 @@ export default function Menu() {
           </Link>
         </div>
       </div>
+
+      {/* Profile Menu Modal */}
+      {showProfileMenu && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-40 z-40"
+            onClick={() => setShowProfileMenu(false)}
+          ></div>
+
+          {/* Profile Card */}
+          <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
+            <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl">
+              {/* Avatar */}
+              <div className="flex justify-center mb-4">
+                <div
+                  className="w-[101px] h-[103px] rounded-full border-2 border-[#E32712] bg-cover bg-center"
+                  style={{
+                    backgroundImage:
+                      "url('https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138')",
+                  }}
+                ></div>
+              </div>
+
+              {/* Name */}
+              <h2
+                className="text-[#E32712] text-center text-lg font-semibold mb-6"
+                style={{ fontFamily: "Montserrat" }}
+              >
+                ALEX MANCIPE
+              </h2>
+
+              {/* Menu Options */}
+              <div className="space-y-4">
+                {/* Perfil */}
+                <button className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                  <div className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
+                    style={{
+                      backgroundImage:
+                        "url('https://api.builder.io/api/v1/image/assets/TEMP/85dbf2d05cb2d84f9d2377ef0d971836b00c2642?width=60')",
+                    }}
+                  ></div>
+                  <span
+                    className="text-black text-lg font-semibold"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    PERFIL
+                  </span>
+                </button>
+
+                {/* Soporte Técnico */}
+                <button className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                  <div className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
+                    style={{
+                      backgroundImage:
+                        "url('https://api.builder.io/api/v1/image/assets/TEMP/d8ab11eaa9611bedf1df2241b01751b1e1113e2c?width=60')",
+                    }}
+                  ></div>
+                  <span
+                    className="text-black text-lg font-semibold"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    SOPORTE TECNICO
+                  </span>
+                </button>
+              </div>
+
+              {/* Divider */}
+              <div className="w-full h-px bg-[#6D6E73] my-6"></div>
+
+              {/* Cerrar Sesión */}
+              <button
+                onClick={handleLogout}
+                className="w-full text-left hover:bg-gray-50 p-2 rounded-lg transition-colors"
+              >
+                <span
+                  className="text-[#6D6E73] text-lg font-semibold"
+                  style={{ fontFamily: "Montserrat" }}
+                >
+                  Cerrar Sesion
+                </span>
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
