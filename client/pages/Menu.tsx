@@ -7,28 +7,16 @@ export default function Menu() {
   const [userName, setUserName] = useState("ALEX MANCIPE");
   const navigate = useNavigate();
 
+  const loadProfile = () => {
+    const profile = getUserProfile();
+    if (profile && profile.nombre) {
+      setUserName(profile.nombre.toUpperCase());
+    }
+  };
+
   useEffect(() => {
-    const loadProfile = () => {
-      const profile = getUserProfile();
-      if (profile && profile.nombre) {
-        setUserName(profile.nombre.toUpperCase());
-      }
-    };
-
-    // Load initially
+    // Load profile every time the component mounts
     loadProfile();
-
-    // Listen for storage changes (when profile is updated)
-    window.addEventListener('storage', loadProfile);
-
-    // Also reload when component mounts (e.g., coming back from /perfil)
-    const handleFocus = () => loadProfile();
-    window.addEventListener('focus', handleFocus);
-
-    return () => {
-      window.removeEventListener('storage', loadProfile);
-      window.removeEventListener('focus', handleFocus);
-    };
   }, []);
 
   const handleLogout = () => {
