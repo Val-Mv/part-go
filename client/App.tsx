@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import RecuperarContrasena from "./pages/RecuperarContrasena";
 import Menu from "./pages/Menu";
 import Perfil from "./pages/Perfil";
+import Pedidos from "./pages/Pedidos";
 import Socio from "./pages/Socio";
 import NotFound from "./pages/NotFound";
 
@@ -28,6 +29,7 @@ const App = () => (
           />
           <Route path="/menu" element={<Menu />} />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/socio" element={<Socio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

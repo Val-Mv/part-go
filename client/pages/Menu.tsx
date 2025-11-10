@@ -53,6 +53,7 @@ export default function Menu() {
         {/* Main Action Circles */}
         <div className="w-full flex justify-center gap-4 mb-6">
           <button
+            onClick={() => navigate("/filtro-vehiculo")}
             className="w-36 h-36 rounded-full bg-cover bg-center shadow-lg hover:scale-105 transition-transform"
             style={{
               backgroundImage:
@@ -60,6 +61,7 @@ export default function Menu() {
             }}
           ></button>
           <button
+            onClick={() => navigate("/pedidos")}
             className="w-36 h-36 rounded-full bg-cover bg-center shadow-lg hover:scale-105 transition-transform"
             style={{
               backgroundImage:
