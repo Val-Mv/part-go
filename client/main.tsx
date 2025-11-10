@@ -39,7 +39,9 @@ const App = () => (
   </QueryClientProvider>
 );
 
-createRoot(document.getElementById("root")!).render(<App />);
+const rootElement = document.getElementById("root");
 
-// Register service worker for PWA
-registerServiceWorker();
+if (rootElement && !rootElement.hasChildNodes()) {
+  createRoot(rootElement).render(<App />);
+  registerServiceWorker();
+}
