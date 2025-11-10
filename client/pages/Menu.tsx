@@ -8,10 +8,27 @@ export default function Menu() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const profile = getUserProfile();
-    if (profile && profile.nombre) {
-      setUserName(profile.nombre.toUpperCase());
-    }
+    const loadProfile = () => {
+      const profile = getUserProfile();
+      if (profile && profile.nombre) {
+        setUserName(profile.nombre.toUpperCase());
+      }
+    };
+
+    // Load initially
+    loadProfile();
+
+    // Listen for storage changes (when profile is updated)
+    window.addEventListener('storage', loadProfile);
+
+    // Also reload when component mounts (e.g., coming back from /perfil)
+    const handleFocus = () => loadProfile();
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('storage', loadProfile);
+      window.removeEventListener('focus', handleFocus);
+    };
   }, []);
 
   const handleLogout = () => {
