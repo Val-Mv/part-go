@@ -39,29 +39,17 @@ const App = () => (
   </QueryClientProvider>
 );
 
-// Prevent multiple createRoot calls during hot reload
+// Create and render the root
 const rootContainer = document.getElementById("root");
-if (rootContainer) {
-  const existingRoot = (rootContainer as any).__reactRootContainer;
-
-  if (existingRoot) {
-    // Root already exists, just update
-    existingRoot.render(<App />);
-  } else {
-    // Create new root
-    const root = createRoot(rootContainer);
-    root.render(<App />);
-  }
-
-  // Register service worker only once
-  if (!window.__swRegistered) {
-    registerServiceWorker();
-    window.__swRegistered = true;
-  }
+if (rootContainer && !window.__reactRootInitialized) {
+  window.__reactRootInitialized = true;
+  const root = createRoot(rootContainer);
+  root.render(<App />);
+  registerServiceWorker();
 }
 
 declare global {
   interface Window {
-    __swRegistered?: boolean;
+    __reactRootInitialized?: boolean;
   }
 }
