@@ -1,0 +1,40 @@
+{
+  "name": "PartGo - Piezas Listas Para Moverse",
+  "short_name": "PartGo",
+  "description": "Aplicación de distribución de piezas para moverse. Encuentra las piezas que necesitas con PartGo.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FF5722",
+  "theme_color": "#FF5722",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23FF5722' width='192' height='192'/><text x='50%' y='50%' font-size='80' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Montserrat'>P</text><circle cx='120' cy='110' r='35' fill='%23FFD600' stroke='%23FF9100' stroke-width='3'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23FF5722' width='512' height='512'/><text x='50%' y='40%' font-size='180' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Montserrat'>P</text><circle cx='310' cy='320' r='90' fill='%23FFD600' stroke='%23FF9100' stroke-width='8'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23FF5722' width='192' height='192' rx='45'/><text x='50%' y='50%' font-size='80' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Montserrat'>P</text><circle cx='120' cy='110' r='35' fill='%23FFD600' stroke='%23FF9100' stroke-width='3'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["shopping", "logistics"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23FF5722' width='540' height='720'/><text x='50%' y='50%' font-size='60' fill='white' text-anchor='middle' dominant-baseline='middle'>PartGo</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ]
+}

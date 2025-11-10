@@ -12,6 +12,7 @@ import RecuperarContrasena from "./pages/RecuperarContrasena";
 import Menu from "./pages/Menu";
 import Socio from "./pages/Socio";
 import NotFound from "./pages/NotFound";
+import { registerServiceWorker } from "@/lib/service-worker";
 
 const queryClient = new QueryClient();
 
@@ -39,3 +40,6 @@ const App = () => (
 );
 
 createRoot(document.getElementById("root")!).render(<App />);
+
+// Register service worker for PWA
+registerServiceWorker();
