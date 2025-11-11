@@ -17,6 +17,7 @@ import Carrito from "./pages/Carrito";
 import Pagos from "./pages/Pagos";
 import Garantia from "./pages/Garantia";
 import Socio from "./pages/Socio";
+import Soporte from "./pages/Soporte";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/pagos" element={<Pagos />} />
           <Route path="/garantia/:id" element={<Garantia />} />
           <Route path="/socio" element={<Socio />} />
+          <Route path="/soporte" element={<Soporte />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
