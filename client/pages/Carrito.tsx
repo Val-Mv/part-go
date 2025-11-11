@@ -90,7 +90,7 @@ export default function Carrito() {
               {/* Product Info */}
               <div className="flex-1 min-w-0">
                 <h3
-                  className="text-black text-sm sm:text-base font-bold mb-1 truncate"
+                  className="text-black text-sm sm:text-base font-bold mb-1"
                   style={{ fontFamily: "Montserrat" }}
                 >
                   {item.name}
