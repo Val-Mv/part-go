@@ -144,7 +144,11 @@ export default function Pagos() {
             >
               PayPal
             </span>
-            <div className="w-6 h-6 rounded-full border-2 border-[#B1B0B0] flex items-center justify-center flex-shrink-0">
+            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+              selectedPayment === "paypal"
+                ? "border-partgo-primary bg-partgo-primary bg-opacity-10"
+                : "border-[#B1B0B0]"
+            }`}>
               {selectedPayment === "paypal" && (
                 <div className="w-3 h-3 rounded-full bg-partgo-primary"></div>
               )}
