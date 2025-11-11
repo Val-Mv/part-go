@@ -127,33 +127,36 @@ export default function Garantia() {
             >
               COMIENZA DESDE:
             </h2>
-            <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between relative">
-              <div className="flex-1 pointer-events-none">
-                <p
-                  className="text-gray-500 text-sm sm:text-base font-semibold mb-1"
-                  style={{ fontFamily: "Montserrat" }}
-                >
-                  Fecha:
-                </p>
-                <p
-                  className="text-black text-base sm:text-lg font-bold"
-                  style={{ fontFamily: "Montserrat" }}
-                >
-                  {formatDate(startDate)}
-                </p>
-              </div>
-              <div className="flex-shrink-0 pointer-events-none">
-                <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center">
-                  <Calendar className="w-6 h-6 text-white" />
+            <label htmlFor="startDate" className="block cursor-pointer">
+              <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between relative">
+                <div className="flex-1">
+                  <p
+                    className="text-gray-500 text-sm sm:text-base font-semibold mb-1"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    Fecha:
+                  </p>
+                  <p
+                    className="text-black text-base sm:text-lg font-bold"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    {formatDate(startDate)}
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-white" />
+                  </div>
                 </div>
               </div>
               <input
+                id="startDate"
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                className="sr-only"
               />
-            </div>
+            </label>
           </div>
 
           {/* End Date Section */}
@@ -164,33 +167,36 @@ export default function Garantia() {
             >
               HASTA:
             </h2>
-            <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between relative">
-              <div className="flex-1 pointer-events-none">
-                <p
-                  className="text-gray-500 text-sm sm:text-base font-semibold mb-1"
-                  style={{ fontFamily: "Montserrat" }}
-                >
-                  Fecha:
-                </p>
-                <p
-                  className="text-black text-base sm:text-lg font-bold"
-                  style={{ fontFamily: "Montserrat" }}
-                >
-                  {formatDate(endDate)}
-                </p>
-              </div>
-              <div className="flex-shrink-0 pointer-events-none">
-                <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center">
-                  <Calendar className="w-6 h-6 text-white" />
+            <label htmlFor="endDate" className="block cursor-pointer">
+              <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between relative">
+                <div className="flex-1">
+                  <p
+                    className="text-gray-500 text-sm sm:text-base font-semibold mb-1"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    Fecha:
+                  </p>
+                  <p
+                    className="text-black text-base sm:text-lg font-bold"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    {formatDate(endDate)}
+                  </p>
+                </div>
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-white" />
+                  </div>
                 </div>
               </div>
               <input
+                id="endDate"
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                className="sr-only"
               />
-            </div>
+            </label>
           </div>
 
           {/* Product Card */}
