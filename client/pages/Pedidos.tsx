@@ -65,7 +65,7 @@ export default function Pedidos() {
             {/* Anteriores Button - SVG Pill shape with icon */}
             <button
               onClick={() => setActiveTab("anteriores")}
-              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow active:scale-98"
+              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow active:scale-98 overflow-hidden"
             >
               {/* White background pill */}
               <svg
@@ -99,7 +99,7 @@ export default function Pedidos() {
             {/* Actual Button - SVG Pill shape with icon */}
             <button
               onClick={() => {}}
-              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow"
+              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow overflow-hidden"
             >
               {/* White background pill */}
               <svg
