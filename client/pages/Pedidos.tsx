@@ -62,68 +62,42 @@ export default function Pedidos() {
         {activeTab === "actual" ? (
           /* Tab Selection View */
           <div className="space-y-6">
-            {/* Anteriores Button - SVG Pill shape with icon */}
+            {/* Anteriores Button - Rounded pill with icon */}
             <button
               onClick={() => setActiveTab("anteriores")}
-              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow active:scale-98 overflow-hidden"
+              className="w-full h-[61px] bg-white rounded-full shadow-md hover:shadow-lg transition-shadow active:scale-98 flex items-center justify-center gap-4"
             >
-              {/* White background pill */}
-              <svg
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 294 61"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 30.5C0 13.6553 13.6553 0 30.5 0H263.5C280.345 0 294 13.6553 294 30.5C294 47.3447 280.345 61 263.5 61H30.5C13.6553 61 0 47.3447 0 30.5Z"
-                  fill="white"
-                />
-              </svg>
-
               {/* Icon on left - Box with arrow (Anteriores) */}
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F343e950f5ef34d4b9b0833007fadef2a%2F378659a9f53942b1ab699d2dd0abcf76?format=webp&width=128"
                 alt="Anteriores"
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-16 h-16 object-contain"
+                className="w-12 h-12 object-contain flex-shrink-0"
               />
 
               {/* Text */}
               <span
-                className="relative text-black text-2xl font-medium text-center block"
+                className="text-black text-2xl font-medium"
                 style={{ fontFamily: "Montserrat" }}
               >
                 ANTERIORES
               </span>
             </button>
 
-            {/* Actual Button - SVG Pill shape with icon */}
+            {/* Actual Button - Rounded pill with icon */}
             <button
               onClick={() => {}}
-              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow overflow-hidden"
+              className="w-full h-[61px] bg-white rounded-full shadow-md hover:shadow-lg transition-shadow flex items-center justify-center gap-4"
             >
-              {/* White background pill */}
-              <svg
-                className="absolute inset-0 w-full h-full"
-                viewBox="0 0 294 61"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 30.5C0 13.6553 13.6553 0 30.5 0H263.5C280.345 0 294 13.6553 294 30.5C294 47.3447 280.345 61 263.5 61H30.5C13.6553 61 0 47.3447 0 30.5Z"
-                  fill="white"
-                />
-              </svg>
-
               {/* Icon on left - Shopping cart with check (Actual) */}
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F343e950f5ef34d4b9b0833007fadef2a%2Faeddaa666fd740969e40d87e51ddcba9?format=webp&width=128"
                 alt="Actual"
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-16 h-16 object-contain"
+                className="w-12 h-12 object-contain flex-shrink-0"
               />
 
               {/* Text */}
               <span
-                className="relative text-black text-2xl font-medium text-center block"
+                className="text-black text-2xl font-medium"
                 style={{ fontFamily: "Montserrat" }}
               >
                 ACTUAL
