@@ -79,7 +79,7 @@ export default function Carrito() {
               className="bg-white rounded-3xl p-3 sm:p-4 shadow-lg border border-[#BEBABA] flex items-center gap-3 sm:gap-4"
             >
               {/* Product Image */}
-              <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
                 <img
                   src={item.image}
                   alt={item.name}
