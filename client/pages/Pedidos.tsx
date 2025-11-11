@@ -62,42 +62,72 @@ export default function Pedidos() {
         {activeTab === "actual" ? (
           /* Tab Selection View */
           <div className="space-y-6">
-            {/* Anteriores Button */}
+            {/* Anteriores Button - SVG Pill shape with icon */}
             <button
               onClick={() => setActiveTab("anteriores")}
-              className="w-full h-[61px] bg-white rounded-[30px] flex items-center gap-4 px-4 shadow-md hover:shadow-lg transition-all active:scale-98"
+              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow active:scale-98"
             >
-              <div
-                className="w-16 h-[61px] rounded-full bg-cover bg-center flex-shrink-0"
+              {/* White background pill */}
+              <svg
+                className="absolute inset-0 w-full h-full"
+                viewBox="0 0 294 61"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 30.5C0 13.6553 13.6553 0 30.5 0H263.5C280.345 0 294 13.6553 294 30.5C294 47.3447 280.345 61 263.5 61H30.5C13.6553 61 0 47.3447 0 30.5Z"
+                  fill="white"
+                />
+              </svg>
+
+              {/* Icon on left */}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-cover bg-center"
                 style={{
                   backgroundImage:
                     "url('https://api.builder.io/api/v1/image/assets/TEMP/41cc57a412a0ecb7e173d2008b46a3ec20ae147f?width=312')",
-                  backgroundSize: "contain",
+                  backgroundSize: "cover",
                 }}
               ></div>
+
+              {/* Text */}
               <span
-                className="text-black text-2xl font-medium flex-1 text-center"
+                className="relative text-black text-2xl font-medium text-center block"
                 style={{ fontFamily: "Montserrat" }}
               >
                 ANTERIORES
               </span>
             </button>
 
-            {/* Actual Button */}
+            {/* Actual Button - SVG Pill shape with icon */}
             <button
               onClick={() => {}}
-              className="w-full h-[61px] bg-white rounded-[30px] flex items-center gap-4 px-4 shadow-md hover:shadow-lg transition-all"
+              className="w-full h-[61px] relative shadow-md hover:shadow-lg transition-shadow"
             >
-              <div
-                className="w-16 h-[61px] rounded-full bg-cover bg-center flex-shrink-0"
+              {/* White background pill */}
+              <svg
+                className="absolute inset-0 w-full h-full"
+                viewBox="0 0 294 61"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 30.5C0 13.6553 13.6553 0 30.5 0H263.5C280.345 0 294 13.6553 294 30.5C294 47.3447 280.345 61 263.5 61H30.5C13.6553 61 0 47.3447 0 30.5Z"
+                  fill="white"
+                />
+              </svg>
+
+              {/* Icon on left */}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-cover bg-center"
                 style={{
                   backgroundImage:
                     "url('https://api.builder.io/api/v1/image/assets/TEMP/4c34988cca03487ce380295f5cea2f14cba53d44?width=312')",
-                  backgroundSize: "contain",
+                  backgroundSize: "cover",
                 }}
               ></div>
+
+              {/* Text */}
               <span
-                className="text-black text-2xl font-medium flex-1 text-center"
+                className="relative text-black text-2xl font-medium text-center block"
                 style={{ fontFamily: "Montserrat" }}
               >
                 ACTUAL
