@@ -85,6 +85,7 @@ export default function Producto() {
       description: `${product.name} (x${quantity}) agregado al carrito`,
     });
     setQuantity(1);
+    navigate("/carrito");
   };
 
   return (
