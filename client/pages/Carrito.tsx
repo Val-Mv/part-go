@@ -72,11 +72,11 @@ export default function Carrito() {
         </div>
 
         {/* Cart Items */}
-        <div className="w-full space-y-4 mb-6">
+        <div className="w-full space-y-3 sm:space-y-4 mb-6">
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-3xl p-4 shadow-lg border border-[#BEBABA] flex items-center gap-4"
+              className="bg-white rounded-3xl p-3 sm:p-4 shadow-lg border border-[#BEBABA] flex items-center gap-3 sm:gap-4"
             >
               {/* Product Image */}
               <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
