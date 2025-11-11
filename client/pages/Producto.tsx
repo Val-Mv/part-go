@@ -233,7 +233,7 @@ export default function Producto() {
           </div>
 
           {/* Add to Cart Button */}
-          <button className="w-full bg-partgo-primary hover:bg-[#C22E0F] transition-colors text-white text-xl font-bold py-4 rounded-2xl shadow-md">
+          <button className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-xl font-bold py-4 rounded-2xl shadow-md">
             <span style={{ fontFamily: "Montserrat" }}>
               AGREGAR AL CARRITO
             </span>
