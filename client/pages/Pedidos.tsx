@@ -81,35 +81,11 @@ export default function Pedidos() {
               </svg>
 
               {/* Icon on left - Box with arrow (Anteriores) */}
-              <svg
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-16 h-[61px]"
-                width="64"
-                height="61"
-                viewBox="0 0 64 61"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse cx="32" cy="30.5" rx="32" ry="30.5" fill="url(#pattern_anteriores)" />
-                <defs>
-                  <pattern
-                    id="pattern_anteriores"
-                    patternContentUnits="objectBoundingBox"
-                    width="1"
-                    height="1"
-                  >
-                    <use
-                      xlinkHref="#image_anteriores"
-                      transform="matrix(0.00186157 0 0 0.00195312 -0.337708 0)"
-                    />
-                  </pattern>
-                  <image
-                    id="image_anteriores"
-                    width="900"
-                    height="512"
-                    xlinkHref="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M50 15L30 8L10 15v18c0 12 8 23 20 28 12-5 20-16 20-28V15z' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M32 25L42 35M32 25L22 35M32 25v20' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E"
-                  />
-                </defs>
-              </svg>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F343e950f5ef34d4b9b0833007fadef2a%2F378659a9f53942b1ab699d2dd0abcf76?format=webp&width=128"
+                alt="Anteriores"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-16 h-16 object-contain"
+              />
 
               {/* Text */}
               <span
@@ -139,35 +115,11 @@ export default function Pedidos() {
               </svg>
 
               {/* Icon on left - Shopping cart with check (Actual) */}
-              <svg
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-16 h-[61px]"
-                width="64"
-                height="61"
-                viewBox="0 0 64 61"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <ellipse cx="32" cy="30.5" rx="32" ry="30.5" fill="url(#pattern_actual)" />
-                <defs>
-                  <pattern
-                    id="pattern_actual"
-                    patternContentUnits="objectBoundingBox"
-                    width="1"
-                    height="1"
-                  >
-                    <use
-                      xlinkHref="#image_actual"
-                      transform="matrix(0.00125 0 0 0.00131148 0 -0.0245902)"
-                    />
-                  </pattern>
-                  <image
-                    id="image_actual"
-                    width="800"
-                    height="800"
-                    xlinkHref="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M10 10h8l8 32h24l6-16H20' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='28' cy='52' r='3' fill='black'/%3E%3Ccircle cx='48' cy='52' r='3' fill='black'/%3E%3Ccircle cx='38' cy='20' r='12' fill='white' stroke='black' stroke-width='2'/%3E%3Cpath d='M33 20l3 4 6-8' stroke='black' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
-                  />
-                </defs>
-              </svg>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F343e950f5ef34d4b9b0833007fadef2a%2Faeddaa666fd740969e40d87e51ddcba9?format=webp&width=128"
+                alt="Actual"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-16 h-16 object-contain"
+              />
 
               {/* Text */}
               <span
