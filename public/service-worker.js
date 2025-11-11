@@ -66,15 +66,17 @@ self.addEventListener('fetch', (event) => {
             const responseToCache = response.clone();
 
             // Cache successful responses for HTML, CSS, JS, images
-            const contentType = response.headers.get('content-type');
-            if (
-              event.request.url.includes('/api/') === false &&
-              (contentType === null || 
-               contentType.includes('text/html') ||
+            const contentType = response.headers.get('content-type') || '';
+            const shouldCache =
+              !event.request.url.includes('/api/') &&
+              !event.request.url.includes('/service-worker.js') &&
+              (contentType.includes('text/html') ||
                contentType.includes('text/css') ||
                contentType.includes('application/javascript') ||
-               contentType.includes('image/'))
-            ) {
+               contentType.includes('image/') ||
+               contentType.includes('application/json'));
+
+            if (shouldCache) {
               caches.open(CACHE_NAME)
                 .then((cache) => {
                   cache.put(event.request, responseToCache);
@@ -84,7 +86,7 @@ self.addEventListener('fetch', (event) => {
             return response;
           })
           .catch(() => {
-            // Return offline page or cached fallback if network fails
+            // Return cached index.html if network fails
             return caches.match('/');
           });
       })
