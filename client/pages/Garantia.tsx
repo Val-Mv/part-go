@@ -84,11 +84,6 @@ export default function Garantia() {
   };
 
   const handleSubmitWarranty = () => {
-    if (!startDate || !endDate) {
-      alert("Por favor selecciona ambas fechas");
-      return;
-    }
-    alert("Garantía solicitada exitosamente");
     navigate(`/producto/${id}`);
   };
 
