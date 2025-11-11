@@ -90,27 +90,27 @@ export default function Carrito() {
               {/* Product Info */}
               <div className="flex-1 min-w-0">
                 <h3
-                  className="text-black text-lg font-bold mb-1"
+                  className="text-black text-sm sm:text-base font-bold mb-1 truncate"
                   style={{ fontFamily: "Montserrat" }}
                 >
                   {item.name}
                 </h3>
                 <div className="flex items-baseline gap-1 mb-1">
                   <span
-                    className="text-black text-base font-bold"
+                    className="text-black text-sm sm:text-base font-bold whitespace-nowrap"
                     style={{ fontFamily: "Montserrat" }}
                   >
                     {item.price}
                   </span>
                   <span
-                    className="text-[#BDB6B6] text-sm font-semibold"
+                    className="text-[#BDB6B6] text-xs sm:text-sm font-semibold"
                     style={{ fontFamily: "Montserrat" }}
                   >
                     COP
                   </span>
                 </div>
                 <p
-                  className="text-[#198C16] text-base font-semibold"
+                  className="text-[#198C16] text-xs sm:text-sm font-semibold"
                   style={{ fontFamily: "Montserrat" }}
                 >
                   {item.type}
@@ -149,25 +149,25 @@ export default function Carrito() {
         </div>
 
         {/* Order Summary */}
-        <div className="w-full bg-white rounded-3xl p-6 shadow-lg border border-[#BEBABA] mb-6">
+        <div className="w-full bg-white rounded-3xl p-4 sm:p-6 shadow-lg border border-[#BEBABA] mb-6">
           <h2
-            className="text-black text-2xl font-bold mb-6"
+            className="text-black text-xl sm:text-2xl font-bold mb-4 sm:mb-6"
             style={{ fontFamily: "Montserrat" }}
           >
             RESUMEN DEL PEDIDO
           </h2>
 
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {/* Subtotal */}
             <div className="flex justify-between items-center">
               <span
-                className="text-[#0C0C0C] text-lg font-medium"
+                className="text-[#0C0C0C] text-sm sm:text-base font-medium"
                 style={{ fontFamily: "Montserrat" }}
               >
                 Subtotal
               </span>
               <span
-                className="text-[#262424] text-lg font-medium"
+                className="text-[#262424] text-sm sm:text-base font-medium"
                 style={{ fontFamily: "Montserrat" }}
               >
                 {formatPrice(subtotal)}
@@ -177,13 +177,13 @@ export default function Carrito() {
             {/* Shipping */}
             <div className="flex justify-between items-center">
               <span
-                className="text-[#262424] text-lg font-medium"
+                className="text-[#262424] text-sm sm:text-base font-medium"
                 style={{ fontFamily: "Montserrat" }}
               >
                 Envio
               </span>
               <span
-                className="text-black text-lg font-medium"
+                className="text-black text-sm sm:text-base font-medium"
                 style={{ fontFamily: "Montserrat" }}
               >
                 {formatPrice(shipping)}
@@ -191,15 +191,15 @@ export default function Carrito() {
             </div>
 
             {/* Total */}
-            <div className="flex justify-between items-center pt-3">
+            <div className="flex justify-between items-center pt-2 sm:pt-3">
               <span
-                className="text-[#262424] text-xl font-bold"
+                className="text-[#262424] text-lg sm:text-xl font-bold"
                 style={{ fontFamily: "Montserrat" }}
               >
                 TOTAL
               </span>
               <span
-                className="text-[#FF3C00] text-xl font-bold"
+                className="text-[#FF3C00] text-lg sm:text-xl font-bold"
                 style={{ fontFamily: "Montserrat" }}
               >
                 {formatPrice(total)}
@@ -209,7 +209,7 @@ export default function Carrito() {
         </div>
 
         {/* Checkout Button */}
-        <button className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-xl font-bold py-4 rounded-2xl shadow-md">
+        <button className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-lg sm:text-xl font-bold py-3 sm:py-4 rounded-2xl shadow-md">
           <span style={{ fontFamily: "Montserrat" }}>FINALIZAR COMPRA</span>
         </button>
       </div>
