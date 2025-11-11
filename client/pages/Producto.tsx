@@ -163,7 +163,10 @@ export default function Producto() {
           </div>
 
           {/* Warranty Section */}
-          <div className="flex items-center gap-3 mb-6">
+          <button
+            onClick={() => navigate(`/garantia/${product.id}`)}
+            className="flex items-center gap-3 mb-6 w-full text-left hover:bg-gray-50 p-2 rounded-lg transition-colors"
+          >
             <svg
               width="27"
               height="32"
@@ -217,7 +220,7 @@ export default function Producto() {
                 {product.warranty}
               </p>
             </div>
-          </div>
+          </button>
 
           {/* Quantity Selector */}
           <div className="flex justify-end mb-6">
