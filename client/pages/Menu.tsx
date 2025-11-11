@@ -121,7 +121,7 @@ export default function Menu() {
 
           {/* Profile Card */}
           <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
-            <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl">
+            <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
               {/* Avatar */}
               <div className="flex justify-center mb-4">
                 <div
