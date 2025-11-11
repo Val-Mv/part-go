@@ -277,7 +277,13 @@ export default function Pagos() {
                 </button>
 
                 {/* Soporte Técnico */}
-                <button className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors">
+                <button
+                  onClick={() => {
+                    setShowProfileMenu(false);
+                    navigate("/soporte");
+                  }}
+                  className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                >
                   <div
                     className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
                     style={{
