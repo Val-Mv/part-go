@@ -13,19 +13,22 @@ const mockOrders: Order[] = [
     id: "1",
     name: "LLANTA MICHELIN",
     date: "22/10",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/861ec5bd98c49d2882a65f889562c666d9ab76c0?width=100",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/861ec5bd98c49d2882a65f889562c666d9ab76c0?width=100",
   },
   {
     id: "2",
     name: "LLANTA MICHELIN",
     date: "25/10",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/861ec5bd98c49d2882a65f889562c666d9ab76c0?width=100",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/861ec5bd98c49d2882a65f889562c666d9ab76c0?width=100",
   },
   {
     id: "3",
     name: "LLANTA MICHELIN",
     date: "28/10",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/861ec5bd98c49d2882a65f889562c666d9ab76c0?width=100",
+    image:
+      "https://api.builder.io/api/v1/image/assets/TEMP/861ec5bd98c49d2882a65f889562c666d9ab76c0?width=100",
   },
 ];
 

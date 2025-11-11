@@ -38,7 +38,8 @@ export default function Producto() {
       price: "$583.000",
       type: "ORIGINAL",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/cdf073f1082d4432a207b254e9dd7c7d6489a4f6?width=248",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/cdf073f1082d4432a207b254e9dd7c7d6489a4f6?width=248",
     },
     "2": {
       id: 2,
@@ -46,7 +47,8 @@ export default function Producto() {
       price: "$242.500",
       type: "GENERICO",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/d2dc656134920a8164b10184da5f8959a37c8cf9?width=236",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/d2dc656134920a8164b10184da5f8959a37c8cf9?width=236",
     },
     "3": {
       id: 3,
@@ -54,7 +56,8 @@ export default function Producto() {
       price: "$281.000",
       type: "ORIGINAL",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/ba45d26294a6df5720017ed2523045ff81a91013?width=290",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/ba45d26294a6df5720017ed2523045ff81a91013?width=290",
     },
     "4": {
       id: 4,
@@ -62,7 +65,8 @@ export default function Producto() {
       price: "$70.000",
       type: "GENERICO",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
     },
   };
 
@@ -253,9 +257,7 @@ export default function Producto() {
             onClick={handleAddToCart}
             className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-xl font-bold py-4 rounded-2xl shadow-md"
           >
-            <span style={{ fontFamily: "Montserrat" }}>
-              AGREGAR AL CARRITO
-            </span>
+            <span style={{ fontFamily: "Montserrat" }}>AGREGAR AL CARRITO</span>
           </button>
         </div>
       </div>
@@ -270,7 +272,10 @@ export default function Producto() {
           ></div>
 
           {/* Profile Card */}
-          <div className="fixed inset-0 flex items-center justify-center z-50 px-4" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="fixed inset-0 flex items-center justify-center z-50 px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl">
               {/* Avatar */}
               <div className="flex justify-center mb-4">
@@ -301,7 +306,8 @@ export default function Producto() {
                   }}
                   className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
                 >
-                  <div className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
+                  <div
+                    className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
                     style={{
                       backgroundImage:
                         "url('https://api.builder.io/api/v1/image/assets/TEMP/85dbf2d05cb2d84f9d2377ef0d971836b00c2642?width=60')",
@@ -323,7 +329,8 @@ export default function Producto() {
                   }}
                   className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
                 >
-                  <div className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
+                  <div
+                    className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
                     style={{
                       backgroundImage:
                         "url('https://api.builder.io/api/v1/image/assets/TEMP/d8ab11eaa9611bedf1df2241b01751b1e1113e2c?width=60')",

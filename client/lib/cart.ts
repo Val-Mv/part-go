@@ -12,10 +12,10 @@ const CART_STORAGE_KEY = "partgo_cart";
 
 export function getCart(): CartItem[] {
   if (typeof window === "undefined") return [];
-  
+
   const cartData = localStorage.getItem(CART_STORAGE_KEY);
   if (!cartData) return [];
-  
+
   try {
     return JSON.parse(cartData);
   } catch {
@@ -28,23 +28,29 @@ export function saveCart(cart: CartItem[]): void {
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
 
-export function addToCart(product: Omit<CartItem, "quantity">, quantity: number = 1): void {
+export function addToCart(
+  product: Omit<CartItem, "quantity">,
+  quantity: number = 1,
+): void {
   const cart = getCart();
   const existingItem = cart.find((item) => item.id === product.id);
-  
+
   if (existingItem) {
     existingItem.quantity += quantity;
   } else {
     cart.push({ ...product, quantity });
   }
-  
+
   saveCart(cart);
 }
 
-export function updateCartItemQuantity(productId: number, quantity: number): void {
+export function updateCartItemQuantity(
+  productId: number,
+  quantity: number,
+): void {
   const cart = getCart();
   const item = cart.find((item) => item.id === productId);
-  
+
   if (item) {
     if (quantity <= 0) {
       removeFromCart(productId);

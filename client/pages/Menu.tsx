@@ -120,7 +120,10 @@ export default function Menu() {
           ></div>
 
           {/* Profile Card */}
-          <div className="fixed inset-0 flex items-center justify-center z-50 px-4" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="fixed inset-0 flex items-center justify-center z-50 px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl">
               {/* Avatar */}
               <div className="flex justify-center mb-4">
@@ -151,7 +154,8 @@ export default function Menu() {
                   }}
                   className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
                 >
-                  <div className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
+                  <div
+                    className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
                     style={{
                       backgroundImage:
                         "url('https://api.builder.io/api/v1/image/assets/TEMP/85dbf2d05cb2d84f9d2377ef0d971836b00c2642?width=60')",
@@ -173,7 +177,8 @@ export default function Menu() {
                   }}
                   className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
                 >
-                  <div className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
+                  <div
+                    className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
                     style={{
                       backgroundImage:
                         "url('https://api.builder.io/api/v1/image/assets/TEMP/d8ab11eaa9611bedf1df2241b01751b1e1113e2c?width=60')",

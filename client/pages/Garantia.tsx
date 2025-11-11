@@ -24,9 +24,9 @@ export default function Garantia() {
     const today = new Date();
     const nextYear = new Date(today);
     nextYear.setFullYear(today.getFullYear() + 1);
-    
-    setStartDate(today.toISOString().split('T')[0]);
-    setEndDate(nextYear.toISOString().split('T')[0]);
+
+    setStartDate(today.toISOString().split("T")[0]);
+    setEndDate(nextYear.toISOString().split("T")[0]);
   }, []);
 
   const handleLogout = () => {
@@ -43,7 +43,8 @@ export default function Garantia() {
       price: "$583.000",
       type: "ORIGINAL",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/cdf073f1082d4432a207b254e9dd7c7d6489a4f6?width=248",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/cdf073f1082d4432a207b254e9dd7c7d6489a4f6?width=248",
     },
     "2": {
       id: 2,
@@ -51,7 +52,8 @@ export default function Garantia() {
       price: "$242.500",
       type: "GENERICO",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/d2dc656134920a8164b10184da5f8959a37c8cf9?width=236",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/d2dc656134920a8164b10184da5f8959a37c8cf9?width=236",
     },
     "3": {
       id: 3,
@@ -59,7 +61,8 @@ export default function Garantia() {
       price: "$281.000",
       type: "ORIGINAL",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/ba45d26294a6df5720017ed2523045ff81a91013?width=290",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/ba45d26294a6df5720017ed2523045ff81a91013?width=290",
     },
     "4": {
       id: 4,
@@ -67,7 +70,8 @@ export default function Garantia() {
       price: "$70.000",
       type: "GENERICO",
       warranty: "YAMAHA - XTZ 125",
-      image: "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
+      image:
+        "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
     },
   };
 
@@ -235,7 +239,9 @@ export default function Garantia() {
               onClick={handleSubmitWarranty}
               className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-lg sm:text-xl font-bold py-3 sm:py-4 rounded-2xl shadow-md"
             >
-              <span style={{ fontFamily: "Montserrat" }}>SOLICITAR GARANTIA</span>
+              <span style={{ fontFamily: "Montserrat" }}>
+                SOLICITAR GARANTIA
+              </span>
             </button>
           </div>
         </div>

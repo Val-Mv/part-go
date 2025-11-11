@@ -26,7 +26,7 @@ export default function FiltroModelo() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const brand = searchParams.get("brand") || "yamaha";
-  
+
   const [selectedModel, setSelectedModel] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -46,7 +46,7 @@ export default function FiltroModelo() {
   };
 
   const filteredModels = models.filter((model) =>
-    model.name.toLowerCase().includes(searchQuery.toLowerCase())
+    model.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (

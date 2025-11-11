@@ -38,7 +38,7 @@ export default function FiltroVehiculo() {
   };
 
   const filteredBrands = brands.filter((brand) =>
-    brand.name.toLowerCase().includes(searchQuery.toLowerCase())
+    brand.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (

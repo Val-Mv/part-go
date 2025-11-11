@@ -1,7 +1,11 @@
 import { useState, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pencil } from "lucide-react";
-import { saveUserProfile, getUserProfile, UserProfile } from "@/lib/user-profile";
+import {
+  saveUserProfile,
+  getUserProfile,
+  UserProfile,
+} from "@/lib/user-profile";
 
 export default function Perfil() {
   const navigate = useNavigate();
