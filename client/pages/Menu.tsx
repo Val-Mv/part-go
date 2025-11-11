@@ -120,8 +120,8 @@ export default function Menu() {
           ></div>
 
           {/* Profile Card */}
-          <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
-            <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="fixed inset-0 flex items-center justify-center z-50 px-4" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl">
               {/* Avatar */}
               <div className="flex justify-center mb-4">
                 <div
