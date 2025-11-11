@@ -79,9 +79,9 @@ export default function Producto() {
     <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
-        <div className="w-full flex items-center justify-between mb-8">
+        <div className="w-full flex items-center justify-between mb-8 gap-4">
           <h1
-            className="text-white text-5xl font-semibold text-center flex-1"
+            className="text-white text-3xl sm:text-4xl md:text-5xl font-semibold text-center flex-1"
             style={{
               fontFamily: "Montserrat",
               textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
