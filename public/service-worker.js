@@ -2,8 +2,7 @@ const CACHE_NAME = 'partgo-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/manifest.json',
-  '/public/robots.txt'
+  '/manifest.json'
 ];
 
 // Install event - cache assets
