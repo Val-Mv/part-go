@@ -22,12 +22,7 @@ export default function Soporte() {
   ];
 
   return (
-    <div
-      className="min-h-screen flex flex-col"
-      style={{
-        background: "linear-gradient(180deg, #FF3C00 0%, #FFA800 100%)",
-      }}
-    >
+    <div className="min-h-screen bg-partgo-hero flex flex-col">
       {/* Header */}
       <div className="px-4 sm:px-6 py-6 flex items-center justify-between">
         <h1
