@@ -104,7 +104,7 @@ export default function Producto() {
         <div className="w-full bg-white rounded-3xl p-6 shadow-lg">
           {/* Product Name */}
           <h2
-            className="text-black text-2xl font-bold text-center mb-6"
+            className="text-black text-xl font-bold text-center mb-6"
             style={{ fontFamily: "Montserrat" }}
           >
             {product.name}
@@ -120,28 +120,28 @@ export default function Producto() {
           </div>
 
           {/* Price and Badge Row */}
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-baseline gap-2">
+          <div className="flex items-center justify-between gap-3 mb-8">
+            <div className="flex items-baseline gap-1 flex-shrink-0">
               <span
-                className="text-black text-3xl font-semibold"
+                className="text-black text-2xl font-semibold whitespace-nowrap"
                 style={{ fontFamily: "Montserrat" }}
               >
-                {product.price.replace(".", ".")}
+                {product.price}
               </span>
               <span
-                className="text-[#BDB6B6] text-base font-semibold"
+                className="text-[#BDB6B6] text-sm font-semibold"
                 style={{ fontFamily: "Montserrat" }}
               >
                 COP
               </span>
             </div>
             <div
-              className={`px-6 py-2 rounded-full ${
+              className={`px-4 py-1.5 rounded-full flex-shrink-0 ${
                 product.type === "ORIGINAL" ? "bg-[#3B9021]" : "bg-[#F52E2E]"
               }`}
             >
               <span
-                className="text-white text-lg font-semibold"
+                className="text-white text-base font-semibold whitespace-nowrap"
                 style={{ fontFamily: "Montserrat" }}
               >
                 {product.type}
