@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
+import { addToCart } from "@/lib/cart";
 import { Minus, Plus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Producto() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -9,6 +11,7 @@ export default function Producto() {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
   const { id } = useParams();
+  const { toast } = useToast();
 
   const loadProfile = () => {
     const profile = getUserProfile();
@@ -73,6 +76,15 @@ export default function Producto() {
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+    toast({
+      title: "Producto agregado",
+      description: `${product.name} (x${quantity}) agregado al carrito`,
+    });
+    setQuantity(1);
   };
 
   return (
@@ -233,7 +245,10 @@ export default function Producto() {
           </div>
 
           {/* Add to Cart Button */}
-          <button className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-xl font-bold py-4 rounded-2xl shadow-md">
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-xl font-bold py-4 rounded-2xl shadow-md"
+          >
             <span style={{ fontFamily: "Montserrat" }}>
               AGREGAR AL CARRITO
             </span>
