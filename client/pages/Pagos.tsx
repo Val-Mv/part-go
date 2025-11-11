@@ -73,7 +73,11 @@ export default function Pagos() {
           {/* Credit/Debit Card */}
           <button
             onClick={() => setSelectedPayment("card")}
-            className="w-full bg-white rounded-3xl p-4 shadow-lg border border-[#BEBABA] flex items-center gap-4 hover:bg-gray-50 transition-colors"
+            className={`w-full rounded-3xl p-4 shadow-lg flex items-center gap-4 transition-all ${
+              selectedPayment === "card"
+                ? "bg-white border-2 border-partgo-primary"
+                : "bg-white border border-[#BEBABA] hover:bg-gray-50"
+            }`}
           >
             <div className="w-14 h-14 rounded-2xl bg-[#FF6B35] flex items-center justify-center flex-shrink-0">
               <svg
@@ -105,7 +109,11 @@ export default function Pagos() {
           {/* PayPal */}
           <button
             onClick={() => setSelectedPayment("paypal")}
-            className="w-full bg-white rounded-3xl p-4 shadow-lg border border-[#BEBABA] flex items-center gap-4 hover:bg-gray-50 transition-colors"
+            className={`w-full rounded-3xl p-4 shadow-lg flex items-center gap-4 transition-all ${
+              selectedPayment === "paypal"
+                ? "bg-white border-2 border-partgo-primary"
+                : "bg-white border border-[#BEBABA] hover:bg-gray-50"
+            }`}
           >
             <div className="w-14 h-14 rounded-2xl bg-[#FF6B35] flex items-center justify-center flex-shrink-0">
               <svg
