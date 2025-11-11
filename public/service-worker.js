@@ -7,13 +7,15 @@ const urlsToCache = [
 
 // Install event - cache assets
 self.addEventListener('install', (event) => {
+  console.log('[Service Worker] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
+        console.log('[Service Worker] Caching core assets');
         return cache.addAll(urlsToCache);
       })
       .catch((err) => {
-        console.log('Cache open failed:', err);
+        console.warn('[Service Worker] Cache open failed:', err);
       })
   );
   self.skipWaiting();
@@ -21,11 +23,13 @@ self.addEventListener('install', (event) => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
+  console.log('[Service Worker] Activating...');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
+            console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
