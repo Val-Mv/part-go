@@ -208,7 +208,7 @@ export default function Garantia() {
               {product.name}
             </h3>
 
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4 mb-6">
               {/* Product Image */}
               <div className="w-32 h-32 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
                 <img
@@ -234,16 +234,16 @@ export default function Garantia() {
                 </p>
               </div>
             </div>
+
+            {/* Submit Button */}
+            <button
+              onClick={handleSubmitWarranty}
+              className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-lg sm:text-xl font-bold py-3 sm:py-4 rounded-2xl shadow-md"
+            >
+              <span style={{ fontFamily: "Montserrat" }}>SOLICITAR GARANTIA</span>
+            </button>
           </div>
         </div>
-
-        {/* Submit Button */}
-        <button
-          onClick={handleSubmitWarranty}
-          className="w-full bg-[#FF3C00] hover:bg-[#E63B00] transition-colors text-white text-lg sm:text-xl font-bold py-3 sm:py-4 rounded-2xl shadow-md mt-6"
-        >
-          <span style={{ fontFamily: "Montserrat" }}>SOLICITAR GARANTIA</span>
-        </button>
       </div>
 
       {/* Profile Menu Modal */}
