@@ -127,8 +127,8 @@ export default function Garantia() {
             >
               COMIENZA DESDE:
             </h2>
-            <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between">
-              <div>
+            <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between relative">
+              <div className="flex-1">
                 <p
                   className="text-gray-500 text-sm sm:text-base font-semibold mb-1"
                   style={{ fontFamily: "Montserrat" }}
@@ -142,14 +142,14 @@ export default function Garantia() {
                   {formatDate(startDate)}
                 </p>
               </div>
-              <label className="cursor-pointer">
+              <label className="cursor-pointer flex-shrink-0">
                 <input
                   type="date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
-                  className="sr-only"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
-                <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center hover:bg-[#FF5525] transition-colors">
+                <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center hover:bg-[#FF5525] transition-colors pointer-events-none">
                   <Calendar className="w-6 h-6 text-white" />
                 </div>
               </label>
@@ -164,8 +164,8 @@ export default function Garantia() {
             >
               HASTA:
             </h2>
-            <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between">
-              <div>
+            <div className="bg-white rounded-2xl p-4 shadow-md border border-[#BEBABA] flex items-center justify-between relative">
+              <div className="flex-1">
                 <p
                   className="text-gray-500 text-sm sm:text-base font-semibold mb-1"
                   style={{ fontFamily: "Montserrat" }}
@@ -179,14 +179,14 @@ export default function Garantia() {
                   {formatDate(endDate)}
                 </p>
               </div>
-              <label className="cursor-pointer">
+              <label className="cursor-pointer flex-shrink-0">
                 <input
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  className="sr-only"
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
-                <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center hover:bg-[#FF5525] transition-colors">
+                <div className="w-12 h-12 rounded-full bg-[#FF6B35] flex items-center justify-center hover:bg-[#FF5525] transition-colors pointer-events-none">
                   <Calendar className="w-6 h-6 text-white" />
                 </div>
               </label>
