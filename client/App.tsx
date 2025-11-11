@@ -14,6 +14,7 @@ import FiltroModelo from "./pages/FiltroModelo";
 import Catalogo from "./pages/Catalogo";
 import Producto from "./pages/Producto";
 import Carrito from "./pages/Carrito";
+import Pagos from "./pages/Pagos";
 import Socio from "./pages/Socio";
 import NotFound from "./pages/NotFound";
 
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/producto/:id" element={<Producto />} />
           <Route path="/carrito" element={<Carrito />} />
+          <Route path="/pagos" element={<Pagos />} />
           <Route path="/socio" element={<Socio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
