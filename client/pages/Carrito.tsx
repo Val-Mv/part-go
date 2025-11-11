@@ -118,18 +118,18 @@ export default function Carrito() {
               </div>
 
               {/* Quantity Controls */}
-              <div className="bg-white rounded-2xl shadow-md flex items-center gap-3 px-4 py-2 flex-shrink-0">
+              <div className="bg-white rounded-2xl shadow-md flex items-center gap-2 px-3 py-1.5 sm:gap-3 sm:px-4 sm:py-2 flex-shrink-0">
                 <button
                   onClick={() =>
                     handleQuantityChange(item.id, item.quantity - 1)
                   }
-                  className="text-black text-lg font-semibold hover:text-partgo-primary transition-colors"
+                  className="text-black text-sm sm:text-lg font-semibold hover:text-partgo-primary transition-colors"
                   style={{ fontFamily: "Montserrat" }}
                 >
-                  <Minus className="w-4 h-4" />
+                  <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
                 </button>
                 <span
-                  className="text-black text-lg font-semibold min-w-[1.5rem] text-center"
+                  className="text-black text-sm sm:text-lg font-semibold min-w-[1.5rem] text-center"
                   style={{ fontFamily: "Montserrat" }}
                 >
                   {item.quantity}
@@ -138,10 +138,10 @@ export default function Carrito() {
                   onClick={() =>
                     handleQuantityChange(item.id, item.quantity + 1)
                   }
-                  className="text-black text-lg font-semibold hover:text-partgo-primary transition-colors"
+                  className="text-black text-sm sm:text-lg font-semibold hover:text-partgo-primary transition-colors"
                   style={{ fontFamily: "Montserrat" }}
                 >
-                  <Plus className="w-4 h-4" />
+                  <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                 </button>
               </div>
             </div>
