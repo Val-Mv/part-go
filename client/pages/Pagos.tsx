@@ -101,13 +101,9 @@ export default function Pagos() {
             </span>
             <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
               selectedPayment === "card"
-                ? "border-partgo-primary bg-partgo-primary bg-opacity-10"
-                : "border-[#B1B0B0]"
-            }`}>
-              {selectedPayment === "card" && (
-                <div className="w-3 h-3 rounded-full bg-partgo-primary"></div>
-              )}
-            </div>
+                ? "border-partgo-primary bg-partgo-primary"
+                : "border-[#B1B0B0] bg-white"
+            }`}></div>
           </button>
 
           {/* PayPal */}
@@ -146,13 +142,9 @@ export default function Pagos() {
             </span>
             <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
               selectedPayment === "paypal"
-                ? "border-partgo-primary bg-partgo-primary bg-opacity-10"
-                : "border-[#B1B0B0]"
-            }`}>
-              {selectedPayment === "paypal" && (
-                <div className="w-3 h-3 rounded-full bg-partgo-primary"></div>
-              )}
-            </div>
+                ? "border-partgo-primary bg-partgo-primary"
+                : "border-[#B1B0B0] bg-white"
+            }`}></div>
           </button>
         </div>
 
