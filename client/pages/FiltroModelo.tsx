@@ -1,44 +1,52 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
 
-interface Brand {
+interface Model {
   id: string;
   name: string;
-  logo?: string;
 }
 
-const brands: Brand[] = [
-  { id: "todas", name: "Todas las marcas" },
-  {
-    id: "akt",
-    name: "AKT Motos",
-    logo: "https://api.builder.io/api/v1/image/assets/TEMP/e74096cf028b0ff97ba90d10c2b6e4ac0c422920?width=72",
-  },
-  {
-    id: "yamaha",
-    name: "Yamaha",
-    logo: "https://api.builder.io/api/v1/image/assets/TEMP/0c0e21567797db1e2d03c6db8f93aabad6974180?width=72",
-  },
-];
+const modelsByBrand: Record<string, Model[]> = {
+  yamaha: [
+    { id: "fz150", name: "FZ150" },
+    { id: "mt03-abs", name: "MT03 ABS" },
+    { id: "fz25", name: "FZ25" },
+    { id: "xtz125", name: "XTZ 125" },
+  ],
+  akt: [
+    { id: "nkd", name: "NKD" },
+    { id: "ttr125", name: "TTR 125" },
+    { id: "ttr200", name: "TTR 200" },
+    { id: "cargo", name: "CARGO" },
+  ],
+};
 
-export default function FiltroVehiculo() {
+export default function FiltroModelo() {
   const navigate = useNavigate();
-  const [selectedBrand, setSelectedBrand] = useState("yamaha");
+  const [searchParams] = useSearchParams();
+  const brand = searchParams.get("brand") || "yamaha";
+  
+  const [selectedModel, setSelectedModel] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleApply = () => {
-    // Save filter and navigate to model selection
-    console.log("Selected brand:", selectedBrand);
-    if (selectedBrand === "todas") {
-      navigate("/menu");
-    } else {
-      navigate(`/filtro-modelo?brand=${selectedBrand}`);
+  const models = modelsByBrand[brand] || modelsByBrand.yamaha;
+
+  useEffect(() => {
+    // Set default selection to last model
+    if (models.length > 0 && !selectedModel) {
+      setSelectedModel(models[models.length - 1].id);
     }
+  }, [models, selectedModel]);
+
+  const handleCatalog = () => {
+    // Save model selection and navigate to catalog
+    console.log("Selected model:", selectedModel);
+    navigate("/catalogo");
   };
 
-  const filteredBrands = brands.filter((brand) =>
-    brand.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredModels = models.filter((model) =>
+    model.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -57,7 +65,7 @@ export default function FiltroVehiculo() {
             FILTRO DE VEHICULO
           </h1>
           <button
-            onClick={() => navigate("/menu")}
+            onClick={() => navigate("/filtro-vehiculo")}
             className="w-16 h-16 rounded-full border-2 border-white bg-cover bg-center flex-shrink-0 hover:scale-105 transition-transform"
             style={{
               backgroundImage:
@@ -73,7 +81,7 @@ export default function FiltroVehiculo() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" />
             <input
               type="text"
-              placeholder="Buscar marca"
+              placeholder="Buscar modelo"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-[41px] pl-12 pr-4 rounded-xl bg-[#F5F5F5] text-[#A8A4A4] text-xl font-semibold focus:outline-none focus:ring-2 focus:ring-[#FF7A33]"
@@ -81,38 +89,26 @@ export default function FiltroVehiculo() {
             />
           </div>
 
-          {/* Brand Options */}
+          {/* Model Options */}
           <div className="space-y-4 mb-6">
-            {filteredBrands.map((brand) => (
+            {filteredModels.map((model) => (
               <button
-                key={brand.id}
-                onClick={() => setSelectedBrand(brand.id)}
+                key={model.id}
+                onClick={() => setSelectedModel(model.id)}
                 className="w-full h-[49px] bg-white rounded-xl shadow-md flex items-center px-4 hover:shadow-lg transition-shadow"
               >
-                {/* Logo (if exists) */}
-                {brand.logo && (
-                  <div
-                    className="w-9 h-9 rounded-full border border-black/40 bg-cover bg-center flex-shrink-0 mr-3"
-                    style={{
-                      backgroundImage: `url('${brand.logo}')`,
-                    }}
-                  ></div>
-                )}
-
-                {/* Brand Name */}
+                {/* Model Name */}
                 <span
-                  className={`flex-1 text-lg text-left ${
-                    brand.id === "todas" ? "font-semibold" : "font-bold"
-                  }`}
+                  className="flex-1 text-xl text-left font-bold"
                   style={{ fontFamily: "Montserrat" }}
                 >
-                  {brand.name}
+                  {model.name}
                 </span>
 
                 {/* Radio Button */}
                 <div
                   className={`w-[17px] h-[15px] rounded-full border flex-shrink-0 ${
-                    selectedBrand === brand.id
+                    selectedModel === model.id
                       ? "bg-[#FF3C00] border-white"
                       : "bg-white border-[#B1B0B0]"
                   }`}
@@ -121,16 +117,16 @@ export default function FiltroVehiculo() {
             ))}
           </div>
 
-          {/* Apply Button */}
+          {/* Catalog Button */}
           <button
-            onClick={handleApply}
+            onClick={handleCatalog}
             className="w-full max-w-[222px] mx-auto block h-[50px] bg-[#FF3C00] rounded-xl shadow-md hover:bg-[#FF4C10] transition-colors active:scale-95"
           >
             <span
               className="text-white text-xl font-bold"
               style={{ fontFamily: "Montserrat" }}
             >
-              {selectedBrand === "todas" ? "APLICAR" : "APLICAR"}
+              CATALOGO
             </span>
           </button>
         </div>
