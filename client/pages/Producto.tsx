@@ -2,13 +2,24 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
 import { addToCart } from "@/lib/cart";
-import { Minus, Plus } from "lucide-react";
+import { ArrowLeft, Minus, Plus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+  type: "ORIGINAL" | "GENERICO";
+  image: string;
+  warranty?: string;
+}
 
 export default function Producto() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [userName, setUserName] = useState("ALEX MANCIPE");
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
   const { toast } = useToast();
@@ -20,57 +31,34 @@ export default function Producto() {
     }
   };
 
+  const fetchProduct = async () => {
+    if (!id) return;
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/products/${id}`);
+      if (!response.ok) {
+        throw new Error("Product not found");
+      }
+      const data = await response.json();
+      setProduct(data);
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      setProduct(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     loadProfile();
-  }, []);
+    fetchProduct();
+  }, [id]);
 
   const handleLogout = () => {
     clearUserProfile();
     setShowProfileMenu(false);
     navigate("/");
   };
-
-  // Sample product data - in real app this would come from API or state
-  const products: { [key: string]: any } = {
-    "1": {
-      id: 1,
-      name: "KIT DE CILINDRO",
-      price: "$583.000",
-      type: "ORIGINAL",
-      warranty: "YAMAHA - XTZ 125",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/cdf073f1082d4432a207b254e9dd7c7d6489a4f6?width=248",
-    },
-    "2": {
-      id: 2,
-      name: "KIT DE CILINDRO",
-      price: "$242.500",
-      type: "GENERICO",
-      warranty: "YAMAHA - XTZ 125",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/d2dc656134920a8164b10184da5f8959a37c8cf9?width=236",
-    },
-    "3": {
-      id: 3,
-      name: "PASTILLA DE FRENO",
-      price: "$281.000",
-      type: "ORIGINAL",
-      warranty: "YAMAHA - XTZ 125",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/ba45d26294a6df5720017ed2523045ff81a91013?width=290",
-    },
-    "4": {
-      id: 4,
-      name: "PASTILLA DE FRENO",
-      price: "$70.000",
-      type: "GENERICO",
-      warranty: "YAMAHA - XTZ 125",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
-    },
-  };
-
-  const product = products[id || "1"];
 
   const handleDecrement = () => {
     if (quantity > 1) {
@@ -83,6 +71,7 @@ export default function Producto() {
   };
 
   const handleAddToCart = () => {
+    if (!product) return;
     addToCart(product, quantity);
     toast({
       title: "Producto agregado",
@@ -92,11 +81,36 @@ export default function Producto() {
     navigate("/carrito");
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-partgo-hero flex items-center justify-center">
+        <p className="text-white text-2xl">Cargando producto...</p>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-partgo-hero flex flex-col items-center justify-center text-white">
+        <h1 className="text-4xl mb-4">Producto no encontrado</h1>
+        <button
+          onClick={() => navigate("/catalogo")}
+          className="bg-primary text-primary-foreground px-4 py-2 rounded-lg"
+        >
+          Volver al Catálogo
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
         <div className="w-full flex items-center justify-between mb-8 gap-4">
+          <button onClick={() => navigate(-1)} className="text-white">
+            <ArrowLeft className="w-8 h-8" />
+          </button>
           <h1
             className="text-white text-3xl sm:text-4xl md:text-5xl font-semibold text-center flex-1"
             style={{

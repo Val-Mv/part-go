@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
-import { Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
+
+interface Product {
+  id: number;
+  name: string;
+  price: string;
+  type: "ORIGINAL" | "GENERICO";
+  image: string;
+}
 
 export default function Catalogo() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [userName, setUserName] = useState("ALEX MANCIPE");
   const [searchQuery, setSearchQuery] = useState("");
+  const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
 
   const loadProfile = () => {
@@ -16,8 +25,19 @@ export default function Catalogo() {
     }
   };
 
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("/api/products");
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
   useEffect(() => {
     loadProfile();
+    fetchProducts();
   }, []);
 
   const handleLogout = () => {
@@ -26,41 +46,30 @@ export default function Catalogo() {
     navigate("/");
   };
 
-  // Sample product data
-  const products = [
-    {
-      id: 1,
-      name: "KIT DE CILINDRO",
-      price: "$583.000",
-      type: "ORIGINAL",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/cdf073f1082d4432a207b254e9dd7c7d6489a4f6?width=248",
-    },
-    {
-      id: 2,
-      name: "KIT DE CILINDRO",
-      price: "$242.500",
+  const handleAddProduct = async () => {
+    // Datos de ejemplo para un nuevo producto
+    const newProductData = {
+      name: "NUEVO REPUESTO",
+      price: "$123.456",
       type: "GENERICO",
       image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/d2dc656134920a8164b10184da5f8959a37c8cf9?width=236",
-    },
-    {
-      id: 3,
-      name: "PASTILLA DE FRENO",
-      price: "$281.000",
-      type: "ORIGINAL",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/ba45d26294a6df5720017ed2523045ff81a91013?width=290",
-    },
-    {
-      id: 4,
-      name: "PASTILLA DE FRENO",
-      price: "$70.000",
-      type: "GENERICO",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
-    },
-  ];
+        "https://api.builder.io/api/v1/image/assets/TEMP/38f11cae9061bf779f409ccd300b88f0a804aeaf?width=200", // Una imagen genérica
+    };
+
+    try {
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProductData),
+      });
+      const addedProduct = await response.json();
+      setProducts((prevProducts) => [...prevProducts, addedProduct]);
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8 relative">
@@ -102,6 +111,16 @@ export default function Catalogo() {
               className="w-full h-12 pl-14 pr-4 bg-[#F5F5F5] rounded-xl text-[#A8A4A4] text-xl font-bold placeholder:text-[#A8A4A4] focus:outline-none focus:ring-2 focus:ring-partgo-primary"
               style={{ fontFamily: "Montserrat" }}
             />
+          </div>
+
+          {/* Botón para agregar producto */}
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={handleAddProduct}
+              className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90"
+            >
+              <Plus className="w-5 h-5" /> Agregar Producto
+            </button>
           </div>
 
           {/* Product Grid */}
