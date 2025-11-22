@@ -77,9 +77,6 @@ export default function Pedidos() {
 
             {/* Status Card */}
             <div className="bg-white rounded-2xl p-6 shadow-lg relative">
-              {/* Vertical line connecting icon to timeline */}
-              <div className="absolute left-[60px] top-[36px] bottom-0 w-1 bg-[#FF3C00] -z-0"></div>
-
               {/* Status Icon and Title */}
               <div className="flex items-center gap-4 mb-6 relative z-10">
                 {/* Large delivery icon */}
