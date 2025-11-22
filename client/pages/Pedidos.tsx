@@ -115,13 +115,13 @@ export default function Pedidos() {
                   <div className="flex-1 min-w-0">
                     <h3
                       className="text-black text-lg font-bold mb-1"
-                      style={{ fontFamily: "Inter" }}
+                      style={{ fontFamily: "Montserrat" }}
                     >
                       Carlos Martinez
                     </h3>
                     <p
                       className="text-[#717171] text-xs mb-1"
-                      style={{ fontFamily: "Inter" }}
+                      style={{ fontFamily: "Montserrat" }}
                     >
                       Moto Yamaha - Placa BC12D
                     </p>
@@ -129,7 +129,7 @@ export default function Pedidos() {
                       <Phone className="w-4 h-4 text-[#3BD361] fill-[#3BD361]" />
                       <p
                         className="text-[#717171] text-xs"
-                        style={{ fontFamily: "Inter" }}
+                        style={{ fontFamily: "Montserrat" }}
                       >
                         310 555686
                       </p>
@@ -141,7 +141,7 @@ export default function Pedidos() {
               {/* Timeline */}
               <div className="relative pl-10">
                 {/* Timeline vertical line - Orange */}
-                <div className="absolute left-3 top-0 bottom-0 w-1 bg-[#FF3C00]"></div>
+                <div className="absolute left-3.5 top-0 bottom-0 w-1 bg-[#FF3C00]"></div>
 
                 {/* Timeline items */}
                 <div className="space-y-6">
