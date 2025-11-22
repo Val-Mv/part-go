@@ -140,8 +140,8 @@ export default function Pedidos() {
 
               {/* Timeline */}
               <div className="relative pl-10">
-                {/* Timeline vertical line - Orange */}
-                <div className="absolute left-[20px] top-0 bottom-0 w-1 bg-[#FF3C00]"></div>
+                {/* Timeline vertical line - Orange - passes through center of circles */}
+                <div className="absolute left-[19px] top-0 bottom-0 w-1 bg-[#FF3C00]"></div>
 
                 {/* Timeline items */}
                 <div className="space-y-6">
