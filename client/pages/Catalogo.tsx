@@ -66,7 +66,7 @@ export default function Catalogo() {
     <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
-        <div className="w-full flex items-center justify-between mb-8 gap-4">
+        <div className="w-full flex items-center justify-between mb-8">
           <h1
             className="text-white text-5xl font-semibold text-center flex-1"
             style={{
@@ -77,12 +77,6 @@ export default function Catalogo() {
           >
             CATALOGO
           </h1>
-          <button
-            onClick={() => navigate("/carrito")}
-            className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center flex-shrink-0 hover:scale-105 transition-transform"
-          >
-            <ShoppingCart className="w-8 h-8 text-white" strokeWidth={1.5} />
-          </button>
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
             className="w-16 h-16 rounded-full border-2 border-white bg-cover bg-center flex-shrink-0 hover:scale-105 transition-transform"
