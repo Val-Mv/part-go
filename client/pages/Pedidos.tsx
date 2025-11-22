@@ -147,7 +147,7 @@ export default function Pedidos() {
                 <div className="space-y-6">
                   {/* Pedido confirmado */}
                   <div className="relative flex items-center gap-4">
-                    <div className="absolute -left-[6px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
+                    <div className="absolute -left-[13px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
                       <Check className="w-4 h-4 text-white stroke-[3]" />
                     </div>
                     <p
@@ -160,7 +160,7 @@ export default function Pedidos() {
 
                   {/* Repartidor buscando el repuesto */}
                   <div className="relative flex items-center gap-4">
-                    <div className="absolute -left-[6px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
+                    <div className="absolute -left-[13px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
                       <Check className="w-4 h-4 text-white stroke-[3]" />
                     </div>
                     <p
@@ -173,7 +173,7 @@ export default function Pedidos() {
 
                   {/* Pedido entregado */}
                   <div className="relative flex items-center gap-4">
-                    <div className="absolute -left-[6px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10"></div>
+                    <div className="absolute -left-[13px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10"></div>
                     <p
                       className="text-[#A19D9D] text-base md:text-lg font-medium"
                       style={{ fontFamily: "Montserrat" }}
