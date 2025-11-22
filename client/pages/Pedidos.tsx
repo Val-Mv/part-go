@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Check, Phone } from "lucide-react";
 
 interface Order {
   id: string;
@@ -35,7 +36,7 @@ const mockOrders: Order[] = [
 export default function Pedidos() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"anteriores" | "actual">("actual");
-  const [userName, setUserName] = useState("ALEX MANCIPE");
+  const [showTracking, setShowTracking] = useState(false);
 
   return (
     <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-8">
@@ -50,7 +51,7 @@ export default function Pedidos() {
               WebkitTextStroke: "1px white",
             }}
           >
-            PEDIDOS
+            {showTracking ? "RASTREO" : "PEDIDOS"}
           </h1>
           <button
             onClick={() => navigate("/menu")}
@@ -62,7 +63,138 @@ export default function Pedidos() {
           ></button>
         </div>
 
-        {activeTab === "actual" ? (
+        {showTracking ? (
+          /* Tracking View */
+          <div className="space-y-6">
+            {/* Map Container */}
+            <div className="w-full aspect-[331/252] rounded-2xl overflow-hidden shadow-lg">
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/ff5b3f4cca2a069350bbe8a1d9ab3d458f03ff35?width=662"
+                alt="Mapa de entrega"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Status Card */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg">
+              {/* Status Icon and Title */}
+              <div className="flex items-center gap-4 mb-6">
+                {/* Large delivery icon */}
+                <div className="relative flex-shrink-0">
+                  {/* Outer circle */}
+                  <div className="w-16 h-16 rounded-full border-4 border-[#FF3C00] flex items-center justify-center">
+                    {/* Inner filled circle with checkmark */}
+                    <div className="w-12 h-12 rounded-full bg-[#FF3C00] flex items-center justify-center">
+                      <Check className="w-6 h-6 text-white stroke-[3]" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status text */}
+                <h2
+                  className="text-black text-xl md:text-2xl font-bold"
+                  style={{ fontFamily: "Inter" }}
+                >
+                  ¡Repartidor en Camino!
+                </h2>
+              </div>
+
+              {/* Driver Info Card */}
+              <div className="bg-white rounded-2xl p-4 shadow-md border border-gray-100 mb-6">
+                <div className="flex items-center gap-4">
+                  {/* Driver avatar */}
+                  <div
+                    className="w-16 h-16 md:w-20 md:h-16 rounded-full bg-cover bg-center flex-shrink-0"
+                    style={{
+                      backgroundImage:
+                        "url('https://api.builder.io/api/v1/image/assets/TEMP/c47df31e65f4335a2cd465c10f13e3ed38883572?width=150')",
+                    }}
+                  ></div>
+
+                  {/* Driver details */}
+                  <div className="flex-1 min-w-0">
+                    <h3
+                      className="text-black text-lg font-bold mb-1"
+                      style={{ fontFamily: "Inter" }}
+                    >
+                      Carlos Martinez
+                    </h3>
+                    <p
+                      className="text-[#717171] text-xs mb-1"
+                      style={{ fontFamily: "Inter" }}
+                    >
+                      Moto Yamaha - Placa BC12D
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-[#3BD361] fill-[#3BD361]" />
+                      <p
+                        className="text-[#717171] text-xs"
+                        style={{ fontFamily: "Inter" }}
+                      >
+                        310 555686
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Timeline */}
+              <div className="relative pl-8">
+                {/* Timeline vertical line */}
+                <div className="absolute left-3.5 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+
+                {/* Timeline items */}
+                <div className="space-y-6">
+                  {/* Pedido confirmado */}
+                  <div className="relative flex items-center gap-4">
+                    <div className="absolute -left-8 w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
+                      <Check className="w-4 h-4 text-white stroke-[3]" />
+                    </div>
+                    <p
+                      className="text-[#A19D9D] text-base md:text-lg"
+                      style={{ fontFamily: "Inter" }}
+                    >
+                      Pedido confirmado
+                    </p>
+                  </div>
+
+                  {/* Repartidor buscando el repuesto */}
+                  <div className="relative flex items-center gap-4">
+                    <div className="absolute -left-8 w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
+                      <Check className="w-4 h-4 text-white stroke-[3]" />
+                    </div>
+                    <p
+                      className="text-[#A19D9D] text-base md:text-lg"
+                      style={{ fontFamily: "Inter" }}
+                    >
+                      Repartidor buscando el repuesto
+                    </p>
+                  </div>
+
+                  {/* Pedido entregado */}
+                  <div className="relative flex items-center gap-4">
+                    <div className="absolute -left-8 w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10"></div>
+                    <p
+                      className="text-[#A19D9D] text-base md:text-lg"
+                      style={{ fontFamily: "Inter" }}
+                    >
+                      Pedido entregado
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Back Button */}
+            <button
+              onClick={() => setShowTracking(false)}
+              className="text-white text-lg font-semibold hover:underline"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              ← Volver
+            </button>
+          </div>
+        ) : activeTab === "actual" ? (
           /* Tab Selection View */
           <div className="space-y-6">
             {/* Anteriores Button - Rounded pill with icon */}
@@ -88,7 +220,7 @@ export default function Pedidos() {
 
             {/* Actual Button - Rounded pill with icon */}
             <button
-              onClick={() => {}}
+              onClick={() => setShowTracking(true)}
               className="w-full h-[61px] bg-white rounded-full shadow-md hover:shadow-lg transition-shadow flex items-center justify-center gap-4"
             >
               {/* Icon on left - Shopping cart with check (Actual) */}
