@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
-import { Plus, Search } from "lucide-react";
+import { Plus, Search, ShoppingCart } from "lucide-react";
 
 interface Product {
   id: number;
@@ -98,19 +98,30 @@ export default function Catalogo() {
 
         {/* Search and Product Grid Container */}
         <div className="w-full bg-white rounded-3xl p-6 shadow-lg">
-          {/* Search Input */}
-          <div className="relative mb-6">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
-              <Search className="w-6 h-6 text-[#A8A4A4]" />
+          {/* Search Input with Cart Icon */}
+          <div className="flex gap-3 mb-6">
+            <div className="relative flex-1">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                <Search className="w-6 h-6 text-[#A8A4A4]" />
+              </div>
+              <input
+                type="text"
+                placeholder="REPUESTO"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-12 pl-14 pr-4 bg-[#F5F5F5] rounded-xl text-[#A8A4A4] text-xl font-bold placeholder:text-[#A8A4A4] focus:outline-none focus:ring-2 focus:ring-partgo-primary"
+                style={{ fontFamily: "Montserrat" }}
+              />
             </div>
-            <input
-              type="text"
-              placeholder="REPUESTO"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-12 pl-14 pr-4 bg-[#F5F5F5] rounded-xl text-[#A8A4A4] text-xl font-bold placeholder:text-[#A8A4A4] focus:outline-none focus:ring-2 focus:ring-partgo-primary"
-              style={{ fontFamily: "Montserrat" }}
-            />
+            <button
+              onClick={() => navigate("/carrito")}
+              className="w-12 h-12 rounded-xl bg-[#F5F5F5] hover:bg-gray-200 transition-colors flex items-center justify-center flex-shrink-0"
+            >
+              <ShoppingCart
+                className="w-6 h-6 text-[#A8A4A4]"
+                strokeWidth={1.5}
+              />
+            </button>
           </div>
 
           {/* Botón para agregar producto */}
@@ -125,48 +136,52 @@ export default function Catalogo() {
 
           {/* Product Grid */}
           <div className="grid grid-cols-2 gap-4">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                onClick={() => navigate(`/producto/${product.id}`)}
-                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-              >
-                {/* Product Image */}
-                <div className="w-full aspect-square bg-[#F5F5F5] flex items-center justify-center p-3">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+            {products
+              .filter((product) =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase()),
+              )
+              .map((product) => (
+                <div
+                  key={product.id}
+                  onClick={() => navigate(`/producto/${product.id}`)}
+                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                >
+                  {/* Product Image */}
+                  <div className="w-full aspect-square bg-[#F5F5F5] flex items-center justify-center p-3">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
 
-                {/* Product Info */}
-                <div className="p-3 space-y-1">
-                  <h3
-                    className="text-black text-xs font-semibold text-center"
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    {product.name}
-                  </h3>
-                  <p
-                    className="text-[#A8A4A4] text-[10px] font-semibold text-center"
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    {product.price}
-                  </p>
-                  <p
-                    className={`text-[13px] font-semibold text-center ${
-                      product.type === "ORIGINAL"
-                        ? "text-[#2EF54F]"
-                        : "text-[#F52E2E]"
-                    }`}
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    {product.type}
-                  </p>
+                  {/* Product Info */}
+                  <div className="p-3 space-y-1">
+                    <h3
+                      className="text-black text-xs font-semibold text-center"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
+                      {product.name}
+                    </h3>
+                    <p
+                      className="text-[#A8A4A4] text-[10px] font-semibold text-center"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
+                      {product.price}
+                    </p>
+                    <p
+                      className={`text-[13px] font-semibold text-center ${
+                        product.type === "ORIGINAL"
+                          ? "text-[#2EF54F]"
+                          : "text-[#F52E2E]"
+                      }`}
+                      style={{ fontFamily: "Montserrat" }}
+                    >
+                      {product.type}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>

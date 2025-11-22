@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
 import { addToCart } from "@/lib/cart";
-import { ArrowLeft, Minus, Plus } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Product {
@@ -78,7 +78,7 @@ export default function Producto() {
       description: `${product.name} (x${quantity}) agregado al carrito`,
     });
     setQuantity(1);
-    navigate("/carrito");
+    navigate("/catalogo");
   };
 
   if (loading) {
@@ -133,13 +133,24 @@ export default function Producto() {
 
         {/* Product Detail Container */}
         <div className="w-full bg-white rounded-3xl p-6 shadow-lg">
-          {/* Product Name */}
-          <h2
-            className="text-black text-xl font-bold text-center mb-6"
-            style={{ fontFamily: "Montserrat" }}
-          >
-            {product.name}
-          </h2>
+          {/* Product Name with Cart Icon */}
+          <div className="flex items-center justify-between gap-3 mb-6">
+            <h2
+              className="text-black text-xl font-bold"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              {product.name}
+            </h2>
+            <button
+              onClick={() => navigate("/carrito")}
+              className="w-11 h-11 rounded-full border-2 border-[#FF3C00] bg-white hover:bg-[#FFF5F0] transition-colors flex items-center justify-center flex-shrink-0"
+            >
+              <ShoppingCart
+                className="w-6 h-6 text-[#FF3C00]"
+                strokeWidth={1.5}
+              />
+            </button>
+          </div>
 
           {/* Product Image */}
           <div className="w-full aspect-square bg-white rounded-xl shadow-md flex items-center justify-center p-6 mb-6">

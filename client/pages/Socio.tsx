@@ -9,7 +9,9 @@ type Order = {
   customerAvatar?: string;
   customerInitial?: string;
   pickupLocation: string;
+  pickupAddress: string;
   deliveryLocation: string;
+  deliveryAddress: string;
   status?: "recogiendo" | "entregando" | "entregado";
 };
 
@@ -21,6 +23,11 @@ export default function Socio() {
   const [activeTab, setActiveTab] = useState<"nuevoPedido" | "enCurso">(
     "nuevoPedido",
   );
+  const [showDeliveryTracking, setShowDeliveryTracking] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [deliveryStatus, setDeliveryStatus] = useState<
+    "recogida" | "camino" | "entregado"
+  >("recogida");
 
   const loadProfile = () => {
     const profile = getUserProfile();
@@ -47,14 +54,18 @@ export default function Socio() {
       customerAvatar:
         "https://api.builder.io/api/v1/image/assets/TEMP/ae72dc7cf58d4e99cb25ab8181fa2a3dcb43076f?width=80",
       pickupLocation: "Taller central",
+      pickupAddress: "Calle 5 # 100 -15",
       deliveryLocation: "Av. 20 #35 - 40",
+      deliveryAddress: "Av. 20 #35 - 40",
     },
     {
       id: "PRT-2025-007",
       customerName: "Francisco Rojas",
       customerInitial: "F",
       pickupLocation: "Taller De Pedro",
+      pickupAddress: "Calle 10 # 200 -30",
       deliveryLocation: "Cra. 19 #35 - 40",
+      deliveryAddress: "Cra. 19 #35 - 40",
     },
   ];
 
@@ -65,13 +76,17 @@ export default function Socio() {
       customerAvatar:
         "https://api.builder.io/api/v1/image/assets/TEMP/70fdcc8105ac031d771619967b2bb7b6735af8e4?width=80",
       pickupLocation: "Taller central",
+      pickupAddress: "Calle 5 # 100 -15",
       deliveryLocation: "Av. 20 #35 - 40",
+      deliveryAddress: "Av. 20 #35 - 40",
       status: "recogiendo",
     },
   ];
 
-  const handleAcceptOrder = (orderId: string) => {
-    console.log("Order accepted:", orderId);
+  const handleAcceptOrder = (order: Order) => {
+    setSelectedOrder(order);
+    setDeliveryStatus("recogida");
+    setShowDeliveryTracking(true);
   };
 
   const handleRejectOrder = (orderId: string) => {
@@ -82,9 +97,200 @@ export default function Socio() {
     console.log("Update status for order:", orderId);
   };
 
-  const handleViewMap = (orderId: string) => {
-    console.log("View map for order:", orderId);
+  const handleViewMap = (order: Order) => {
+    setSelectedOrder(order);
+    setDeliveryStatus("recogida");
+    setShowDeliveryTracking(true);
   };
+
+  const handleStatusChange = (status: "recogida" | "camino" | "entregado") => {
+    setDeliveryStatus(status);
+  };
+
+  if (showDeliveryTracking && selectedOrder) {
+    return (
+      <div className="min-h-screen bg-partgo-hero flex flex-col">
+        {/* Header */}
+        <div className="px-4 sm:px-6 py-6 flex items-center justify-between">
+          <h1
+            className="text-white text-3xl sm:text-4xl font-semibold"
+            style={{
+              fontFamily: "Montserrat",
+              textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
+              WebkitTextStroke: "1px white",
+            }}
+          >
+            REPARTIDOR
+          </h1>
+          <button
+            onClick={() => setShowProfileMenu(true)}
+            className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border border-white flex-shrink-0 overflow-hidden"
+            style={{
+              backgroundImage:
+                "url('https://api.builder.io/api/v1/image/assets/TEMP/93f6caefbcf31077d0168431256f02dbf5b353b2?width=139')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+        </div>
+
+        {/* Main Content Card */}
+        <div className="flex-1 px-4 sm:px-6 pb-6">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg max-w-2xl mx-auto">
+            {/* Order Number */}
+            <h2
+              className="text-black text-center text-xl font-bold mb-6"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              PEDIDO: #{selectedOrder.id}
+            </h2>
+
+            {/* Map */}
+            <div className="w-full aspect-[344/182] rounded-2xl overflow-hidden mb-6 shadow">
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/fab937c846a0c1022f5187555de5618832ff718a?width=688"
+                alt="Mapa de ruta"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Client Name */}
+            <h3
+              className="text-black text-base font-bold mb-6"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              Cliente: {selectedOrder.customerName}
+            </h3>
+
+            {/* Locations */}
+            <div className="space-y-4 mb-8">
+              {/* Pickup Location */}
+              <div className="flex items-start gap-3">
+                <MapPin
+                  className="w-6 h-6 text-[#FF3C00] flex-shrink-0 mt-0.5"
+                  strokeWidth={2.5}
+                />
+                <div className="flex-1">
+                  <p
+                    className="text-black text-sm font-bold mb-1"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    Recoger
+                  </p>
+                  <p
+                    className="text-black text-sm font-normal"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    {selectedOrder.pickupLocation},{" "}
+                    {selectedOrder.pickupAddress}
+                  </p>
+                  <div className="h-px bg-[#D2D2D2] mt-2"></div>
+                </div>
+              </div>
+
+              {/* Delivery Location */}
+              <div className="flex items-start gap-3">
+                <MapPin
+                  className="w-6 h-6 text-[#31AA27] flex-shrink-0 mt-0.5"
+                  strokeWidth={2.5}
+                />
+                <div className="flex-1">
+                  <p
+                    className="text-black text-sm font-bold mb-1"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    Entregar
+                  </p>
+                  <p
+                    className="text-black text-sm font-normal"
+                    style={{ fontFamily: "Montserrat" }}
+                  >
+                    {selectedOrder.deliveryAddress}
+                  </p>
+                  <div className="h-px bg-[#D2D2D2] mt-2"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Status Buttons */}
+            <div className="space-y-3 mb-6">
+              {/* En el punto de recogida - Filled */}
+              <button
+                onClick={() => handleStatusChange("recogida")}
+                className={`w-full h-11 rounded-2xl shadow transition-all ${
+                  deliveryStatus === "recogida"
+                    ? "bg-[#FF3C00]"
+                    : "bg-white border border-[#FF3C00]"
+                }`}
+              >
+                <span
+                  className={`text-base font-bold ${
+                    deliveryStatus === "recogida"
+                      ? "text-white"
+                      : "text-[#FF3C00]"
+                  }`}
+                  style={{ fontFamily: "Montserrat" }}
+                >
+                  EN EL PUNTO DE RECOGIDA
+                </span>
+              </button>
+
+              {/* Pedido en camino - Outline */}
+              <button
+                onClick={() => handleStatusChange("camino")}
+                className={`w-full h-11 rounded-2xl shadow transition-all ${
+                  deliveryStatus === "camino"
+                    ? "bg-[#FF3C00]"
+                    : "bg-white border border-[#FF3C00]"
+                }`}
+              >
+                <span
+                  className={`text-base font-bold ${
+                    deliveryStatus === "camino"
+                      ? "text-white"
+                      : "text-[#FF3C00]"
+                  }`}
+                  style={{ fontFamily: "Montserrat" }}
+                >
+                  PEDIDO EN CAMINO
+                </span>
+              </button>
+
+              {/* Entregado - Green */}
+              <button
+                onClick={() => handleStatusChange("entregado")}
+                className={`w-full h-11 rounded-2xl shadow transition-all ${
+                  deliveryStatus === "entregado"
+                    ? "bg-[#31AA27]"
+                    : "bg-white border border-[#31AA27]"
+                }`}
+              >
+                <span
+                  className={`text-base font-bold ${
+                    deliveryStatus === "entregado"
+                      ? "text-white"
+                      : "text-[#31AA27]"
+                  }`}
+                  style={{ fontFamily: "Montserrat" }}
+                >
+                  ENTREGADO
+                </span>
+              </button>
+            </div>
+
+            {/* Back Button */}
+            <button
+              onClick={() => setShowDeliveryTracking(false)}
+              className="text-[#FF3C00] text-sm font-semibold hover:underline"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              ← Volver
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-partgo-hero flex flex-col">
@@ -270,7 +476,7 @@ export default function Socio() {
                         </span>
                       </button>
                       <button
-                        onClick={() => handleAcceptOrder(order.id)}
+                        onClick={() => handleAcceptOrder(order)}
                         className="flex-1 h-11 rounded-2xl bg-[#FF3C00] hover:bg-[#E63B00] transition-colors shadow"
                       >
                         <span
@@ -399,7 +605,7 @@ export default function Socio() {
                         </span>
                       </button>
                       <button
-                        onClick={() => handleViewMap(order.id)}
+                        onClick={() => handleViewMap(order)}
                         className="w-full h-11 rounded-2xl border border-[#FF3C00] bg-white hover:bg-gray-50 transition-colors shadow"
                       >
                         <span
