@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
-import { Search } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 
 export default function Catalogo() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
