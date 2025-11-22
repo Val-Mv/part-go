@@ -81,8 +81,8 @@ export default function Pedidos() {
               <div className="flex items-center gap-4 mb-6 relative">
                 {/* Large delivery icon */}
                 <div className="relative flex-shrink-0">
-                  {/* Vertical line through center - extends up and down */}
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-[calc(100%+200px)] bg-[#FF3C00] -z-10" style={{ top: "-100px", height: "300px" }}></div>
+                  {/* Vertical line through center - extends up and down, aligned with timeline */}
+                  <div className="absolute w-1 bg-[#FF3C00] -z-10" style={{ left: "calc(50% - 2px)", top: "-100px", height: "300px" }}></div>
 
                   {/* Outer circle - stroke only */}
                   <div className="w-[72px] h-[72px] rounded-full border-[5px] border-[#FF3C00] flex items-center justify-center bg-transparent relative z-10">
