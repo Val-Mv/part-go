@@ -77,13 +77,13 @@ export default function Pedidos() {
 
             {/* Status Card */}
             <div className="bg-white rounded-2xl p-6 shadow-lg relative">
+              {/* Vertical line connecting icon to timeline */}
+              <div className="absolute left-[41px] top-[36px] bottom-0 w-1 bg-[#FF3C00] -z-0"></div>
+
               {/* Status Icon and Title */}
-              <div className="flex items-center gap-4 mb-6 relative">
+              <div className="flex items-center gap-4 mb-6 relative z-10">
                 {/* Large delivery icon */}
                 <div className="relative flex-shrink-0">
-                  {/* Vertical line through center - extends up and down, aligned with timeline */}
-                  <div className="absolute w-1 bg-[#FF3C00] -z-10" style={{ left: "calc(50% - 2px)", top: "-100px", height: "300px" }}></div>
-
                   {/* Outer circle - stroke only */}
                   <div className="w-[72px] h-[72px] rounded-full border-[5px] border-[#FF3C00] flex items-center justify-center bg-transparent relative z-10">
                     {/* Inner filled circle with checkmark */}
