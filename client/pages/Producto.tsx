@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
 import { addToCart } from "@/lib/cart";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Producto() {
