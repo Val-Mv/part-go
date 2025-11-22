@@ -131,7 +131,10 @@ export default function Producto() {
               onClick={() => navigate("/carrito")}
               className="w-11 h-11 rounded-full border-2 border-[#FF3C00] bg-white hover:bg-[#FFF5F0] transition-colors flex items-center justify-center flex-shrink-0"
             >
-              <ShoppingCart className="w-6 h-6 text-[#FF3C00]" strokeWidth={1.5} />
+              <ShoppingCart
+                className="w-6 h-6 text-[#FF3C00]"
+                strokeWidth={1.5}
+              />
             </button>
           </div>
 

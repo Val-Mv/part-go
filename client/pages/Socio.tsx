@@ -181,7 +181,8 @@ export default function Socio() {
                     className="text-black text-sm font-normal"
                     style={{ fontFamily: "Montserrat" }}
                   >
-                    {selectedOrder.pickupLocation}, {selectedOrder.pickupAddress}
+                    {selectedOrder.pickupLocation},{" "}
+                    {selectedOrder.pickupAddress}
                   </p>
                   <div className="h-px bg-[#D2D2D2] mt-2"></div>
                 </div>
@@ -224,7 +225,9 @@ export default function Socio() {
               >
                 <span
                   className={`text-base font-bold ${
-                    deliveryStatus === "recogida" ? "text-white" : "text-[#FF3C00]"
+                    deliveryStatus === "recogida"
+                      ? "text-white"
+                      : "text-[#FF3C00]"
                   }`}
                   style={{ fontFamily: "Montserrat" }}
                 >
@@ -243,7 +246,9 @@ export default function Socio() {
               >
                 <span
                   className={`text-base font-bold ${
-                    deliveryStatus === "camino" ? "text-white" : "text-[#FF3C00]"
+                    deliveryStatus === "camino"
+                      ? "text-white"
+                      : "text-[#FF3C00]"
                   }`}
                   style={{ fontFamily: "Montserrat" }}
                 >
@@ -262,7 +267,9 @@ export default function Socio() {
               >
                 <span
                   className={`text-base font-bold ${
-                    deliveryStatus === "entregado" ? "text-white" : "text-[#31AA27]"
+                    deliveryStatus === "entregado"
+                      ? "text-white"
+                      : "text-[#31AA27]"
                   }`}
                   style={{ fontFamily: "Montserrat" }}
                 >

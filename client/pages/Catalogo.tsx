@@ -108,7 +108,10 @@ export default function Catalogo() {
               onClick={() => navigate("/carrito")}
               className="w-12 h-12 rounded-xl bg-[#F5F5F5] hover:bg-gray-200 transition-colors flex items-center justify-center flex-shrink-0"
             >
-              <ShoppingCart className="w-6 h-6 text-[#A8A4A4]" strokeWidth={1.5} />
+              <ShoppingCart
+                className="w-6 h-6 text-[#A8A4A4]"
+                strokeWidth={1.5}
+              />
             </button>
           </div>
 
@@ -116,50 +119,50 @@ export default function Catalogo() {
           <div className="grid grid-cols-2 gap-4">
             {products
               .filter((product) =>
-                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+                product.name.toLowerCase().includes(searchQuery.toLowerCase()),
               )
               .map((product) => (
-              <div
-                key={product.id}
-                onClick={() => navigate(`/producto/${product.id}`)}
-                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-              >
-                {/* Product Image */}
-                <div className="w-full aspect-square bg-[#F5F5F5] flex items-center justify-center p-3">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+                <div
+                  key={product.id}
+                  onClick={() => navigate(`/producto/${product.id}`)}
+                  className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                >
+                  {/* Product Image */}
+                  <div className="w-full aspect-square bg-[#F5F5F5] flex items-center justify-center p-3">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
 
-                {/* Product Info */}
-                <div className="p-3 space-y-1">
-                  <h3
-                    className="text-black text-xs font-semibold text-center"
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    {product.name}
-                  </h3>
-                  <p
-                    className="text-[#A8A4A4] text-[10px] font-semibold text-center"
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    {product.price}
-                  </p>
-                  <p
-                    className={`text-[13px] font-semibold text-center ${
-                      product.type === "ORIGINAL"
-                        ? "text-[#2EF54F]"
-                        : "text-[#F52E2E]"
-                    }`}
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    {product.type}
-                  </p>
+                  {/* Product Info */}
+                  <div className="p-3 space-y-1">
+                    <h3
+                      className="text-black text-xs font-semibold text-center"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
+                      {product.name}
+                    </h3>
+                    <p
+                      className="text-[#A8A4A4] text-[10px] font-semibold text-center"
+                      style={{ fontFamily: "Montserrat" }}
+                    >
+                      {product.price}
+                    </p>
+                    <p
+                      className={`text-[13px] font-semibold text-center ${
+                        product.type === "ORIGINAL"
+                          ? "text-[#2EF54F]"
+                          : "text-[#F52E2E]"
+                      }`}
+                      style={{ fontFamily: "Montserrat" }}
+                    >
+                      {product.type}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
