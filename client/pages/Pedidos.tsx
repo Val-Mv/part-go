@@ -93,7 +93,7 @@ export default function Pedidos() {
                 {/* Status text */}
                 <h2
                   className="text-black text-xl md:text-2xl font-bold"
-                  style={{ fontFamily: "Inter" }}
+                  style={{ fontFamily: "Montserrat" }}
                 >
                   ¡Repartidor en Camino!
                 </h2>
