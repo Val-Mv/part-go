@@ -89,24 +89,36 @@ export default function Catalogo() {
 
         {/* Search and Product Grid Container */}
         <div className="w-full bg-white rounded-3xl p-6 shadow-lg">
-          {/* Search Input */}
-          <div className="relative mb-6">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
-              <Search className="w-6 h-6 text-[#A8A4A4]" />
+          {/* Search Input with Cart Icon */}
+          <div className="flex gap-3 mb-6">
+            <div className="relative flex-1">
+              <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                <Search className="w-6 h-6 text-[#A8A4A4]" />
+              </div>
+              <input
+                type="text"
+                placeholder="REPUESTO"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-12 pl-14 pr-4 bg-[#F5F5F5] rounded-xl text-[#A8A4A4] text-xl font-bold placeholder:text-[#A8A4A4] focus:outline-none focus:ring-2 focus:ring-partgo-primary"
+                style={{ fontFamily: "Montserrat" }}
+              />
             </div>
-            <input
-              type="text"
-              placeholder="REPUESTO"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-12 pl-14 pr-4 bg-[#F5F5F5] rounded-xl text-[#A8A4A4] text-xl font-bold placeholder:text-[#A8A4A4] focus:outline-none focus:ring-2 focus:ring-partgo-primary"
-              style={{ fontFamily: "Montserrat" }}
-            />
+            <button
+              onClick={() => navigate("/carrito")}
+              className="w-12 h-12 rounded-xl bg-[#F5F5F5] hover:bg-gray-200 transition-colors flex items-center justify-center flex-shrink-0"
+            >
+              <ShoppingCart className="w-6 h-6 text-[#A8A4A4]" strokeWidth={1.5} />
+            </button>
           </div>
 
           {/* Product Grid */}
           <div className="grid grid-cols-2 gap-4">
-            {products.map((product) => (
+            {products
+              .filter((product) =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+              )
+              .map((product) => (
               <div
                 key={product.id}
                 onClick={() => navigate(`/producto/${product.id}`)}
