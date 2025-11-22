@@ -81,14 +81,11 @@ export default function Pedidos() {
               <div className="flex items-center gap-4 mb-6">
                 {/* Large delivery icon */}
                 <div className="relative flex-shrink-0">
-                  {/* Outer circle */}
-                  <div className="w-16 h-16 rounded-full border-4 border-[#FF3C00] flex items-center justify-center">
-                    {/* Middle circle */}
-                    <div className="w-12 h-12 rounded-full border-3 border-[#FF3C00] flex items-center justify-center">
-                      {/* Inner filled circle with checkmark */}
-                      <div className="w-8 h-8 rounded-full bg-[#FF3C00] flex items-center justify-center">
-                        <Check className="w-5 h-5 text-white stroke-[3]" />
-                      </div>
+                  {/* Outer circle - stroke only */}
+                  <div className="w-[72px] h-[72px] rounded-full border-[5px] border-[#FF3C00] flex items-center justify-center bg-transparent">
+                    {/* Inner filled circle with checkmark */}
+                    <div className="w-12 h-12 rounded-full bg-[#FF3C00] border-[5px] border-[#FF3C00] flex items-center justify-center">
+                      <Check className="w-6 h-6 text-white stroke-[2]" />
                     </div>
                   </div>
                 </div>
