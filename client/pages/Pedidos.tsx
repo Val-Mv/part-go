@@ -76,13 +76,16 @@ export default function Pedidos() {
             </div>
 
             {/* Status Card */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
+            <div className="bg-white rounded-2xl p-6 shadow-lg relative">
               {/* Status Icon and Title */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-4 mb-6 relative">
                 {/* Large delivery icon */}
                 <div className="relative flex-shrink-0">
+                  {/* Vertical line through center - extends up and down */}
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-[calc(100%+200px)] bg-[#FF3C00] -z-10" style={{ top: "-100px", height: "300px" }}></div>
+
                   {/* Outer circle - stroke only */}
-                  <div className="w-[72px] h-[72px] rounded-full border-[5px] border-[#FF3C00] flex items-center justify-center bg-transparent">
+                  <div className="w-[72px] h-[72px] rounded-full border-[5px] border-[#FF3C00] flex items-center justify-center bg-transparent relative z-10">
                     {/* Inner filled circle with checkmark */}
                     <div className="w-12 h-12 rounded-full bg-[#FF3C00] border-[5px] border-[#FF3C00] flex items-center justify-center">
                       <Check className="w-6 h-6 text-white stroke-[2]" />
