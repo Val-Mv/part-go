@@ -142,7 +142,10 @@ export default function Producto() {
 
   const handleAddToCart = () => {
     if (!product) return;
-    addToCart({ ...product, warranty: product.warranty || "Sin garantía" }, quantity);
+    addToCart(
+      { ...product, warranty: product.warranty || "Sin garantía" },
+      quantity,
+    );
     toast({
       title: "Producto agregado",
       description: `${product.name} (x${quantity}) agregado al carrito`,
