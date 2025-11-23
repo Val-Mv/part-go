@@ -330,13 +330,21 @@ export default function Pedidos() {
             </div>
 
             {/* Back Button */}
-            <button
-              onClick={() => setShowTracking(false)}
-              className="text-white text-lg font-semibold hover:underline"
-              style={{ fontFamily: "Montserrat" }}
-            >
-              ← Volver
-            </button>
+            <div className="pb-8 flex justify-center">
+              <button
+                onClick={() => {
+                  if (location.state?.showTracking) {
+                    navigate("/menu");
+                  } else {
+                    setShowTracking(false);
+                  }
+                }}
+                className="text-white text-lg font-semibold hover:underline py-2 px-4"
+                style={{ fontFamily: "Montserrat" }}
+              >
+                ← Volver
+              </button>
+            </div>
           </div>
         ) : activeTab === "actual" ? (
           /* Tab Selection View */
