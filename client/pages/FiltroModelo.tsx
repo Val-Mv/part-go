@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
+import { getUserProfile } from "@/lib/user-profile";
 
 interface Model {
   id: string;
@@ -29,8 +30,18 @@ export default function FiltroModelo() {
 
   const [selectedModel, setSelectedModel] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [userAvatar, setUserAvatar] = useState(
+    "https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138",
+  );
 
   const models = modelsByBrand[brand] || modelsByBrand.yamaha;
+
+  useEffect(() => {
+    const profile = getUserProfile();
+    if (profile && profile.avatar) {
+      setUserAvatar(profile.avatar);
+    }
+  }, []);
 
   useEffect(() => {
     // Set default selection to last model
@@ -66,12 +77,14 @@ export default function FiltroModelo() {
           </h1>
           <button
             onClick={() => navigate("/filtro-vehiculo")}
-            className="w-16 h-16 rounded-full border-2 border-white bg-cover bg-center flex-shrink-0 hover:scale-105 transition-transform"
-            style={{
-              backgroundImage:
-                "url('https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138')",
-            }}
-          ></button>
+            className="w-16 h-16 rounded-full border-2 border-white flex-shrink-0 hover:scale-105 transition-transform overflow-hidden bg-gray-200"
+          >
+            <img
+              src={userAvatar}
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
+          </button>
         </div>
 
         {/* White Card Container */}

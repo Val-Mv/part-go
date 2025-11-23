@@ -3,6 +3,7 @@ export interface UserProfile {
   telefono: string;
   direccion: string;
   correo: string;
+  avatar?: string;
 }
 
 const STORAGE_KEY = "partgo_user_profile";

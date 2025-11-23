@@ -19,6 +19,8 @@ import Garantia from "./pages/Garantia";
 import Socio from "./pages/Socio";
 import Soporte from "./pages/Soporte";
 import NotFound from "./pages/NotFound";
+import { FloatingCartButton } from "@/components/FloatingCartButton";
+import AgregarProducto from "./pages/AgregarProducto";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <FloatingCartButton />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
@@ -47,6 +50,7 @@ const App = () => (
           <Route path="/garantia/:id" element={<Garantia />} />
           <Route path="/socio" element={<Socio />} />
           <Route path="/soporte" element={<Soporte />} />
+          <Route path="/agregar-producto" element={<AgregarProducto />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

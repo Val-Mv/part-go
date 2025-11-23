@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
+import { ProfileModal } from "@/components/ProfileModal";
 import { Plus, Search, ShoppingCart } from "lucide-react";
+import { db } from "@/lib/db";
 
 interface Product {
   id: number;
@@ -14,14 +16,18 @@ interface Product {
 export default function Catalogo() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [userName, setUserName] = useState("ALEX MANCIPE");
+  const [userAvatar, setUserAvatar] = useState(
+    "https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138",
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
 
   const loadProfile = () => {
     const profile = getUserProfile();
-    if (profile && profile.nombre) {
-      setUserName(profile.nombre.toUpperCase());
+    if (profile) {
+      if (profile.nombre) setUserName(profile.nombre.toUpperCase());
+      if (profile.avatar) setUserAvatar(profile.avatar);
     }
   };
 
@@ -63,20 +69,48 @@ export default function Catalogo() {
     ];
 
     try {
-      const response = await fetch("/api/products");
-      if (!response.ok) {
-        console.warn(
-          "API not available, using mock data",
-          response.status,
-          response.statusText,
-        );
-        setProducts(mockProducts);
-        return;
+      // 1. Fetch from API
+      let apiProducts: Product[] = [];
+      try {
+        const response = await fetch("/api/products");
+        if (response.ok) {
+          apiProducts = await response.json();
+        } else {
+          console.warn("API not available, using mock data");
+          apiProducts = mockProducts;
+        }
+      } catch (error) {
+        console.warn("Error fetching products, using mock data:", error);
+        apiProducts = mockProducts;
       }
-      const data = await response.json();
-      setProducts(data);
+
+      // 2. Fetch from IndexedDB (custom products)
+      // Migration: Move localStorage products to IndexedDB if they exist
+      const storedLegacy = localStorage.getItem("custom-products");
+      if (storedLegacy) {
+        try {
+          const legacyProducts = JSON.parse(storedLegacy);
+          if (Array.isArray(legacyProducts)) {
+            for (const p of legacyProducts) {
+              // Avoid duplicates if possible, or just add
+              // Since ID is timestamp, collision is unlikely unless re-running
+              await db.addProduct(p);
+            }
+          }
+          localStorage.removeItem("custom-products");
+          console.log("Migrated custom-products to IndexedDB");
+        } catch (e) {
+          console.error("Migration failed", e);
+        }
+      }
+
+      const localProducts = await db.getAllProducts();
+      
+      // 3. Merge products
+      setProducts([...apiProducts, ...localProducts]);
+
     } catch (error) {
-      console.warn("Error fetching products, using mock data:", error);
+      console.error("Error loading products:", error);
       setProducts(mockProducts);
     }
   };
@@ -90,31 +124,6 @@ export default function Catalogo() {
     clearUserProfile();
     setShowProfileMenu(false);
     navigate("/");
-  };
-
-  const handleAddProduct = async () => {
-    // Datos de ejemplo para un nuevo producto
-    const newProductData = {
-      name: "NUEVO REPUESTO",
-      price: "$123.456",
-      type: "GENERICO",
-      image:
-        "https://api.builder.io/api/v1/image/assets/TEMP/38f11cae9061bf779f409ccd300b88f0a804aeaf?width=200", // Una imagen genérica
-    };
-
-    try {
-      const response = await fetch("/api/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newProductData),
-      });
-      const addedProduct = await response.json();
-      setProducts((prevProducts) => [...prevProducts, addedProduct]);
-    } catch (error) {
-      console.error("Error adding product:", error);
-    }
   };
 
   return (
@@ -134,17 +143,19 @@ export default function Catalogo() {
           </h1>
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="w-16 h-16 rounded-full border-2 border-white bg-cover bg-center flex-shrink-0 hover:scale-105 transition-transform"
-            style={{
-              backgroundImage:
-                "url('https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138')",
-            }}
-          ></button>
+            className="w-16 h-16 rounded-full border-2 border-white flex-shrink-0 hover:scale-105 transition-transform overflow-hidden bg-gray-200"
+          >
+            <img
+              src={userAvatar}
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
+          </button>
         </div>
 
         {/* Search and Product Grid Container */}
         <div className="w-full bg-white rounded-3xl p-6 shadow-lg">
-          {/* Search Input with Cart Icon */}
+          {/* Search Input */}
           <div className="flex gap-3 mb-6">
             <div className="relative flex-1">
               <div className="absolute left-4 top-1/2 -translate-y-1/2">
@@ -159,25 +170,6 @@ export default function Catalogo() {
                 style={{ fontFamily: "Montserrat" }}
               />
             </div>
-            <button
-              onClick={() => navigate("/carrito")}
-              className="w-12 h-12 rounded-xl bg-[#F5F5F5] hover:bg-gray-200 transition-colors flex items-center justify-center flex-shrink-0"
-            >
-              <ShoppingCart
-                className="w-6 h-6 text-[#A8A4A4]"
-                strokeWidth={1.5}
-              />
-            </button>
-          </div>
-
-          {/* Botón para agregar producto */}
-          <div className="flex justify-end mb-4">
-            <button
-              onClick={handleAddProduct}
-              className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90"
-            >
-              <Plus className="w-5 h-5" /> Agregar Producto
-            </button>
           </div>
 
           {/* Product Grid */}
@@ -233,107 +225,13 @@ export default function Catalogo() {
       </div>
 
       {/* Profile Menu Modal */}
-      {showProfileMenu && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black bg-opacity-40 z-40"
-            onClick={() => setShowProfileMenu(false)}
-          ></div>
-
-          {/* Profile Card */}
-          <div
-            className="fixed inset-0 flex items-center justify-center z-50 px-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="bg-white rounded-[78px] w-full max-w-[328px] p-8 shadow-2xl">
-              {/* Avatar */}
-              <div className="flex justify-center mb-4">
-                <div
-                  className="w-[101px] h-[103px] rounded-full border-2 border-[#E32712] bg-cover bg-center"
-                  style={{
-                    backgroundImage:
-                      "url('https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138')",
-                  }}
-                ></div>
-              </div>
-
-              {/* Name */}
-              <h2
-                className="text-[#E32712] text-center text-lg font-semibold mb-6"
-                style={{ fontFamily: "Montserrat" }}
-              >
-                {userName}
-              </h2>
-
-              {/* Menu Options */}
-              <div className="space-y-4">
-                {/* Perfil */}
-                <button
-                  onClick={() => {
-                    setShowProfileMenu(false);
-                    navigate("/perfil");
-                  }}
-                  className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
-                >
-                  <div
-                    className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
-                    style={{
-                      backgroundImage:
-                        "url('https://api.builder.io/api/v1/image/assets/TEMP/85dbf2d05cb2d84f9d2377ef0d971836b00c2642?width=60')",
-                    }}
-                  ></div>
-                  <span
-                    className="text-black text-lg font-semibold"
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    PERFIL
-                  </span>
-                </button>
-
-                {/* Soporte Técnico */}
-                <button
-                  onClick={() => {
-                    setShowProfileMenu(false);
-                    navigate("/soporte");
-                  }}
-                  className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
-                >
-                  <div
-                    className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0"
-                    style={{
-                      backgroundImage:
-                        "url('https://api.builder.io/api/v1/image/assets/TEMP/d8ab11eaa9611bedf1df2241b01751b1e1113e2c?width=60')",
-                    }}
-                  ></div>
-                  <span
-                    className="text-black text-lg font-semibold"
-                    style={{ fontFamily: "Montserrat" }}
-                  >
-                    SOPORTE TECNICO
-                  </span>
-                </button>
-              </div>
-
-              {/* Divider */}
-              <div className="w-full h-px bg-[#6D6E73] my-6"></div>
-
-              {/* Cerrar Sesión */}
-              <button
-                onClick={handleLogout}
-                className="w-full text-left hover:bg-gray-50 p-2 rounded-lg transition-colors"
-              >
-                <span
-                  className="text-[#6D6E73] text-lg font-semibold"
-                  style={{ fontFamily: "Montserrat" }}
-                >
-                  Cerrar Sesion
-                </span>
-              </button>
-            </div>
-          </div>
-        </>
-      )}
+      <ProfileModal
+        isOpen={showProfileMenu}
+        onClose={() => setShowProfileMenu(false)}
+        userName={userName}
+        userAvatar={userAvatar}
+        onLogout={handleLogout}
+      />
     </div>
   );
 }

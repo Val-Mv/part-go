@@ -1,6 +1,6 @@
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Pencil } from "lucide-react";
+import { Pencil, Camera } from "lucide-react";
 import {
   saveUserProfile,
   getUserProfile,
@@ -9,11 +9,13 @@ import {
 
 export default function Perfil() {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [profile, setProfile] = useState<UserProfile>({
     nombre: "",
     telefono: "",
     direccion: "",
     correo: "",
+    avatar: "",
   });
 
   useEffect(() => {
@@ -36,6 +38,20 @@ export default function Perfil() {
     }));
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfile((prev) => ({
+          ...prev,
+          avatar: reader.result as string,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md flex flex-col items-center">
@@ -43,13 +59,36 @@ export default function Perfil() {
         <div className="bg-white rounded-[78px] w-full max-w-[338px] p-8 pt-0 shadow-2xl relative">
           {/* Avatar - positioned to overlap top */}
           <div className="flex justify-center -mt-16 mb-2">
-            <div
-              className="w-[101px] h-[103px] rounded-full border-2 border-white bg-cover bg-center shadow-lg"
-              style={{
-                backgroundImage:
-                  "url('https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138')",
-              }}
-            ></div>
+            <div 
+              className="relative group cursor-pointer"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <div className="w-[101px] h-[103px] rounded-full border-4 border-white shadow-lg overflow-hidden bg-gray-100">
+                <img
+                  src={
+                    profile.avatar ||
+                    "https://api.builder.io/api/v1/image/assets/TEMP/58fc892707594f2a836d14fef1bbfe3fda3c2feb?width=138"
+                  }
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Edit Overlay */}
+              <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <Camera className="text-white w-8 h-8" />
+              </div>
+              {/* Edit Badge */}
+              <div className="absolute bottom-0 right-0 bg-[#FF3C00] p-1.5 rounded-full border-2 border-white shadow-sm">
+                <Pencil className="w-3 h-3 text-white" />
+              </div>
+            </div>
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
           </div>
 
           {/* Form */}

@@ -26,6 +26,7 @@ export function getCart(): CartItem[] {
 export function saveCart(cart: CartItem[]): void {
   if (typeof window === "undefined") return;
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  window.dispatchEvent(new Event("cart-updated"));
 }
 
 export function addToCart(
