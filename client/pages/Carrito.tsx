@@ -52,10 +52,10 @@ export default function Carrito() {
   };
 
   return (
-    <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8 relative">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-4 sm:py-8 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
-        <div className="w-full flex items-center justify-between mb-8 gap-4">
+        <div className="w-full flex items-center justify-between mb-4 sm:mb-8 gap-4">
           <h1
             className="text-white text-3xl sm:text-4xl md:text-5xl font-semibold text-center flex-1"
             style={{
@@ -79,7 +79,7 @@ export default function Carrito() {
         </div>
 
         {/* Cart Items */}
-        <div className="w-full space-y-3 sm:space-y-4 mb-6">
+        <div className="w-full space-y-3 sm:space-y-4 mb-4 sm:mb-6">
           {cartItems.map((item) => (
             <div
               key={item.id}
@@ -156,7 +156,7 @@ export default function Carrito() {
         </div>
 
         {/* Order Summary */}
-        <div className="w-full bg-white rounded-3xl p-4 sm:p-6 shadow-lg border border-[#BEBABA] mb-6">
+        <div className="w-full bg-white rounded-3xl p-4 sm:p-6 shadow-lg border border-[#BEBABA] mb-4 sm:mb-6">
           <h2
             className="text-black text-xl sm:text-2xl font-bold mb-4 sm:mb-6"
             style={{ fontFamily: "Montserrat" }}

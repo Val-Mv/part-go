@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
 import { ProfileModal } from "@/components/ProfileModal";
-import { getCartTotal } from "@/lib/cart";
+import { getCartTotal, clearCart } from "@/lib/cart";
 import { ArrowLeft, CreditCard, Wallet, Banknote } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Pagos() {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -13,6 +14,7 @@ export default function Pagos() {
   );
   const [selectedPayment, setSelectedPayment] = useState<string>("");
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const loadProfile = () => {
     const profile = getUserProfile();
@@ -42,18 +44,42 @@ export default function Pagos() {
 
   const handleConfirmPayment = () => {
     if (!selectedPayment) {
-      alert("Por favor selecciona un método de pago");
+      toast({
+        title: "Método de pago requerido",
+        description: "Por favor selecciona un método de pago para continuar.",
+        variant: "destructive",
+      });
       return;
     }
-    // Here you would handle the payment processing
-    alert("Procesando pago...");
+    
+    // Simulate payment processing
+    toast({
+      title: "Procesando pago...",
+      description: "Estamos validando tu transacción.",
+    });
+
+    setTimeout(() => {
+      clearCart();
+      // Dispatch event to ensure UI updates (like floating cart button)
+      window.dispatchEvent(new Event("cart-updated"));
+      
+      toast({
+        title: "¡Compra exitosa!",
+        description: "Tu pedido ha sido recibido correctamente.",
+        className: "bg-green-500 text-white border-none",
+      });
+      
+      setTimeout(() => {
+        navigate("/pedidos", { state: { showTracking: true } });
+      }, 2000);
+    }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8 relative">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-4 sm:py-8 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
-        <div className="w-full flex items-center justify-between mb-8 gap-4">
+        <div className="w-full flex items-center justify-between mb-4 sm:mb-8 gap-4">
           <h1
             className="text-white text-3xl sm:text-4xl md:text-5xl font-semibold text-center flex-1"
             style={{
@@ -77,7 +103,7 @@ export default function Pagos() {
         </div>
 
         {/* Payment Methods */}
-        <div className="w-full space-y-4 mb-6">
+        <div className="w-full space-y-4 mb-4 sm:mb-6">
           {/* Credit/Debit Card */}
           <button
             onClick={() => setSelectedPayment("card")}

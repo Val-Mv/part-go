@@ -95,29 +95,32 @@ export default function Index() {
           </button>
         </div>
 
-        {/* Email/Password Login Link */}
-        <Link to="/login">
-          <p
-            className="text-white text-xl font-thin italic mb-2 text-center drop-shadow-md hover:underline cursor-pointer"
-            style={{
-              fontFamily: "Montserrat",
-              textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
-              WebkitTextStroke: "1px white",
-            }}
-          >
-            Iniciar con correo y contraseña
-          </p>
-        </Link>
+        {/* Links Container */}
+        <div className="flex flex-col gap-6 mt-4 w-full items-center">
+          {/* Email/Password Login Link */}
+          <Link to="/login" className="w-full md:hidden">
+            <p
+              className="text-white text-xl font-thin italic text-center drop-shadow-md hover:underline cursor-pointer"
+              style={{
+                fontFamily: "Montserrat",
+                textShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
+                WebkitTextStroke: "1px white",
+              }}
+            >
+              Iniciar con correo y contraseña
+            </p>
+          </Link>
 
-        {/* Password Recovery Link */}
-        <Link to="/recuperar-contrasena">
-          <p
-            className="text-white text-xl font-bold italic text-center hover:underline cursor-pointer"
-            style={{ fontFamily: "Montserrat" }}
-          >
-            Recuperar contraseña aqui
-          </p>
-        </Link>
+          {/* Password Recovery Link */}
+          <Link to="/recuperar-contrasena" className="w-full">
+            <p
+              className="text-white text-xl font-bold italic text-center hover:underline cursor-pointer"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              Recuperar contraseña aqui
+            </p>
+          </Link>
+        </div>
       </div>
     </div>
   );

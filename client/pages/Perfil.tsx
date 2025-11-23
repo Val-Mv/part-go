@@ -53,7 +53,7 @@ export default function Perfil() {
   };
 
   return (
-    <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-4 sm:py-8">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* White Card Container */}
         <div className="bg-white rounded-[78px] w-full max-w-[338px] p-8 pt-0 shadow-2xl relative">

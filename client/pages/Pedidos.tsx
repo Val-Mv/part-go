@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Check, Phone, Bike } from "lucide-react";
 import { getUserProfile } from "@/lib/user-profile";
 
@@ -36,6 +36,7 @@ const mockOrders: Order[] = [
 
 export default function Pedidos() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState<"anteriores" | "actual">("actual");
   const [showTracking, setShowTracking] = useState(false);
   const [currentStep, setCurrentStep] = useState(0); // 0: Confirmado, 1: Buscando, 2: Entregado
@@ -78,6 +79,15 @@ export default function Pedidos() {
       return () => clearInterval(interval);
     }
   }, [showTracking]);
+
+  useEffect(() => {
+    if (location.state?.showTracking) {
+      setShowTracking(true);
+      // Clear state to avoid reopening tracking on refresh if desired, 
+      // but react-router state persists on refresh usually. 
+      // We can leave it or clear it. For now, let's just set it.
+    }
+  }, [location.state]);
 
   // Puntos de la ruta para seguir la línea punteada (ajustados para seguir las calles)
   const pathPoints = [
