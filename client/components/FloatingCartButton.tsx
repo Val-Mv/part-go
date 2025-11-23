@@ -50,7 +50,7 @@ export function FloatingCartButton() {
   return (
     <button
       onClick={() => navigate("/carrito")}
-      className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-gray-100 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]"
+      className="fixed bottom-8 right-6 sm:bottom-10 sm:right-10 z-50 w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-gray-100 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]"
       aria-label="Ver carrito"
     >
       <div className="relative">
