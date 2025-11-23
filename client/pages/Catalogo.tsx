@@ -26,12 +26,58 @@ export default function Catalogo() {
   };
 
   const fetchProducts = async () => {
+    // Fallback mock data
+    const mockProducts: Product[] = [
+      {
+        id: 1,
+        name: "KIT DE CILINDRO",
+        price: "$583.000",
+        type: "ORIGINAL",
+        image:
+          "https://api.builder.io/api/v1/image/assets/TEMP/cdf073f1082d4432a207b254e9dd7c7d6489a4f6?width=248",
+      },
+      {
+        id: 2,
+        name: "KIT DE CILINDRO",
+        price: "$242.500",
+        type: "GENERICO",
+        image:
+          "https://api.builder.io/api/v1/image/assets/TEMP/d2dc656134920a8164b10184da5f8959a37c8cf9?width=236",
+      },
+      {
+        id: 3,
+        name: "PASTILLA DE FRENO",
+        price: "$281.000",
+        type: "ORIGINAL",
+        image:
+          "https://api.builder.io/api/v1/image/assets/TEMP/ba45d26294a6df5720017ed2523045ff81a91013?width=290",
+      },
+      {
+        id: 4,
+        name: "PASTILLA DE FRENO",
+        price: "$70.000",
+        type: "GENERICO",
+        image:
+          "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
+      },
+    ];
+
     try {
       const response = await fetch("/api/products");
+      if (!response.ok) {
+        console.warn(
+          "API not available, using mock data",
+          response.status,
+          response.statusText,
+        );
+        setProducts(mockProducts);
+        return;
+      }
       const data = await response.json();
       setProducts(data);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.warn("Error fetching products, using mock data:", error);
+      setProducts(mockProducts);
     }
   };
 
