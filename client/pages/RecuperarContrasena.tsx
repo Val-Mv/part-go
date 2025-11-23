@@ -25,7 +25,7 @@ export default function RecuperarContrasena() {
   };
 
   return (
-    <div className="min-h-screen bg-partgo-hero flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center justify-center px-4 py-8 pb-24 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Logo */}
         <div className="mb-6 w-full flex justify-center">

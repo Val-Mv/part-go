@@ -53,10 +53,10 @@ export default function Perfil() {
   };
 
   return (
-    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-4 sm:py-8">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center justify-center px-4 py-8 pb-12">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* White Card Container */}
-        <div className="bg-white rounded-[78px] w-full max-w-[338px] p-8 pt-0 shadow-2xl relative">
+        <div className="bg-white rounded-[78px] w-full max-w-[338px] p-8 pt-0 shadow-2xl relative mt-16">
           {/* Avatar - positioned to overlap top */}
           <div className="flex justify-center -mt-16 mb-2">
             <div 

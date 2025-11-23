@@ -146,7 +146,7 @@ export default function Garantia() {
   }
 
   return (
-    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-4 sm:py-8 relative">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-4 sm:py-8 pb-24 relative">
       <div className="w-full max-w-md flex flex-col items-center">
         {/* Header */}
         <div className="w-full flex items-center justify-between mb-4 sm:mb-8 gap-4">

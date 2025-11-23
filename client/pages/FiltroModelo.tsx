@@ -61,7 +61,7 @@ export default function FiltroModelo() {
   );
 
   return (
-    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-8">
+    <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 pt-4 pb-24 sm:py-8">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="w-full flex items-center justify-between mb-8">
