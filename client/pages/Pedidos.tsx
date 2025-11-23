@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Check, Phone } from "lucide-react";
+import { Check, Phone, Bike } from "lucide-react";
 
 interface Order {
   id: string;
@@ -37,6 +37,68 @@ export default function Pedidos() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"anteriores" | "actual">("actual");
   const [showTracking, setShowTracking] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0); // 0: Confirmado, 1: Buscando, 2: Entregado
+  const [driverProgress, setDriverProgress] = useState(0);
+
+  useEffect(() => {
+    if (showTracking) {
+      setCurrentStep(0);
+      setDriverProgress(0);
+
+      const totalDuration = 10000; // 10 seconds simulation
+      const startTime = Date.now();
+
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / totalDuration, 1);
+        setDriverProgress(progress);
+
+        if (progress < 0.1) {
+          setCurrentStep(0);
+        } else if (progress < 1) {
+          setCurrentStep(1);
+        } else {
+          setCurrentStep(2);
+        }
+
+        if (progress >= 1) clearInterval(interval);
+      }, 50);
+
+      return () => clearInterval(interval);
+    }
+  }, [showTracking]);
+
+  // Puntos de la ruta para seguir la línea punteada (ajustados para seguir las calles)
+  const pathPoints = [
+    { x: 88, y: 82 }, // Inicio (Camión)
+    { x: 78, y: 70 },
+    { x: 68, y: 60 },
+    { x: 55, y: 52 },
+    { x: 42, y: 42 },
+    { x: 30, y: 30 },
+    { x: 18, y: 20 },
+    { x: 12, y: 14 }, // Fin (Casa)
+  ];
+
+  const totalSegments = pathPoints.length - 1;
+  let segmentIndex = Math.floor(driverProgress * totalSegments);
+  let segmentProgress = driverProgress * totalSegments - segmentIndex;
+
+  if (segmentIndex >= totalSegments) {
+    segmentIndex = totalSegments - 1;
+    segmentProgress = 1;
+  }
+
+  const startPoint = pathPoints[segmentIndex];
+  const endPoint = pathPoints[segmentIndex + 1];
+
+  const driverX = startPoint.x + (endPoint.x - startPoint.x) * segmentProgress;
+  const driverY = startPoint.y + (endPoint.y - startPoint.y) * segmentProgress;
+
+  // Calcular rotación para que la moto mire hacia adelante
+  const dx = endPoint.x - startPoint.x;
+  const dy = endPoint.y - startPoint.y;
+  const rotation = Math.atan2(dy, dx) * (180 / Math.PI);
 
   return (
     <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-8">
@@ -67,12 +129,23 @@ export default function Pedidos() {
           /* Tracking View */
           <div className="space-y-6">
             {/* Map Container */}
-            <div className="w-full aspect-[331/252] rounded-2xl overflow-hidden shadow-lg">
+            <div className="w-full aspect-[331/252] rounded-2xl overflow-hidden shadow-lg relative">
               <img
                 src="https://api.builder.io/api/v1/image/assets/TEMP/ff5b3f4cca2a069350bbe8a1d9ab3d458f03ff35?width=662"
                 alt="Mapa de entrega"
                 className="w-full h-full object-cover"
               />
+              {/* Driver Marker */}
+              <div
+                className="absolute w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-75 ease-linear z-10"
+                style={{
+                  left: `${driverX}%`,
+                  top: `${driverY}%`,
+                  transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
+                }}
+              >
+                <Bike className="w-5 h-5 text-[#FF3C00]" />
+              </div>
             </div>
 
             {/* Status Card */}
@@ -95,7 +168,11 @@ export default function Pedidos() {
                   className="text-black text-xl md:text-2xl font-bold"
                   style={{ fontFamily: "Montserrat" }}
                 >
-                  ¡Repartidor en Camino!
+                  {currentStep === 0
+                    ? "Pedido Confirmado"
+                    : currentStep === 1
+                      ? "¡Repartidor en Camino!"
+                      : "Pedido Entregado"}
                 </h2>
               </div>
 
@@ -139,47 +216,91 @@ export default function Pedidos() {
               </div>
 
               {/* Timeline */}
-              <div className="relative pl-16">
-                {/* Timeline vertical line - Orange - passes through center of circles */}
-                <div className="absolute left-[28px] top-0 bottom-0 w-1 bg-[#FF3C00]"></div>
-
-                {/* Timeline items */}
-                <div className="space-y-6">
+              <div className="pl-4">
+                <div className="flex flex-col">
                   {/* Pedido confirmado */}
-                  <div className="relative flex items-center gap-4">
-                    <div className="absolute -left-[20px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
-                      <Check className="w-4 h-4 text-white stroke-[3]" />
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div
+                        className={`w-7 h-7 rounded-full border-2 border-[#FF3C00] flex items-center justify-center z-10 shrink-0 ${
+                          currentStep >= 0 ? "bg-[#FF3C00]" : "bg-white"
+                        }`}
+                      >
+                        {currentStep >= 0 && (
+                          <Check className="w-4 h-4 text-white stroke-[3]" />
+                        )}
+                      </div>
+                      <div
+                        className={`w-1 flex-grow min-h-[2rem] ${
+                          currentStep >= 1 ? "bg-[#FF3C00]" : "bg-gray-200"
+                        }`}
+                      ></div>
                     </div>
-                    <p
-                      className="text-[#A19D9D] text-base md:text-lg font-medium"
-                      style={{ fontFamily: "Montserrat" }}
-                    >
-                      Pedido confirmado
-                    </p>
+                    <div className="pb-8 pt-0.5">
+                      <p
+                        className={`text-base md:text-lg font-medium ${
+                          currentStep >= 0 ? "text-black" : "text-[#A19D9D]"
+                        }`}
+                        style={{ fontFamily: "Montserrat" }}
+                      >
+                        Pedido confirmado
+                      </p>
+                    </div>
                   </div>
 
                   {/* Repartidor buscando el repuesto */}
-                  <div className="relative flex items-center gap-4">
-                    <div className="absolute -left-[20px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10">
-                      <Check className="w-4 h-4 text-white stroke-[3]" />
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div
+                        className={`w-7 h-7 rounded-full border-2 border-[#FF3C00] flex items-center justify-center z-10 shrink-0 ${
+                          currentStep >= 1 ? "bg-[#FF3C00]" : "bg-white"
+                        }`}
+                      >
+                        {currentStep >= 1 && (
+                          <Check className="w-4 h-4 text-white stroke-[3]" />
+                        )}
+                      </div>
+                      <div
+                        className={`w-1 flex-grow min-h-[2rem] ${
+                          currentStep >= 2 ? "bg-[#FF3C00]" : "bg-gray-200"
+                        }`}
+                      ></div>
                     </div>
-                    <p
-                      className="text-[#A19D9D] text-base md:text-lg font-medium"
-                      style={{ fontFamily: "Montserrat" }}
-                    >
-                      Repartidor buscando el repuesto
-                    </p>
+                    <div className="pb-8 pt-0.5">
+                      <p
+                        className={`text-base md:text-lg font-medium ${
+                          currentStep >= 1 ? "text-black" : "text-[#A19D9D]"
+                        }`}
+                        style={{ fontFamily: "Montserrat" }}
+                      >
+                        Repartidor buscando el repuesto
+                      </p>
+                    </div>
                   </div>
 
                   {/* Pedido entregado */}
-                  <div className="relative flex items-center gap-4">
-                    <div className="absolute -left-[20px] w-7 h-7 rounded-full bg-[#FF3C00] border-2 border-[#FF3C00] flex items-center justify-center z-10"></div>
-                    <p
-                      className="text-[#A19D9D] text-base md:text-lg font-medium"
-                      style={{ fontFamily: "Montserrat" }}
-                    >
-                      Pedido entregado
-                    </p>
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div
+                        className={`w-7 h-7 rounded-full border-2 border-[#FF3C00] flex items-center justify-center z-10 shrink-0 ${
+                          currentStep >= 2 ? "bg-[#FF3C00]" : "bg-white"
+                        }`}
+                      >
+                        {currentStep >= 2 && (
+                          <Check className="w-4 h-4 text-white stroke-[3]" />
+                        )}
+                      </div>
+                    </div>
+                    <div className="pt-0.5">
+                      <p
+                        className={`text-base md:text-lg font-medium ${
+                          currentStep >= 2 ? "text-black" : "text-[#A19D9D]"
+                        }`}
+                        style={{ fontFamily: "Montserrat" }}
+                      >
+                        Pedido entregado
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -284,14 +405,7 @@ export default function Pedidos() {
           </div>
         )}
 
-        {/* Logo */}
-        <div className="w-full flex justify-center mt-auto pt-12">
-          <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/38f11cae9061bf779f409ccd300b88f0a804aeaf?width=570"
-            alt="PartGo Logo"
-            className="w-64 h-auto"
-          />
-        </div>
+     
       </div>
     </div>
   );

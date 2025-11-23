@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MapPin, Truck, Check } from "lucide-react";
+import { MapPin, Truck, Check, Bike, X } from "lucide-react";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
 
 type Order = {
@@ -28,6 +28,11 @@ export default function Socio() {
   const [deliveryStatus, setDeliveryStatus] = useState<
     "recogida" | "camino" | "entregado"
   >("recogida");
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [pendingStatus, setPendingStatus] = useState<
+    "recogida" | "camino" | "entregado" | null
+  >(null);
+  const [driverProgress, setDriverProgress] = useState(0);
 
   const loadProfile = () => {
     const profile = getUserProfile();
@@ -104,8 +109,79 @@ export default function Socio() {
   };
 
   const handleStatusChange = (status: "recogida" | "camino" | "entregado") => {
-    setDeliveryStatus(status);
+    if (status === deliveryStatus) return;
+    setPendingStatus(status);
+    setShowConfirmModal(true);
   };
+
+  const confirmStatusChange = () => {
+    if (pendingStatus) {
+      setDeliveryStatus(pendingStatus);
+      setShowConfirmModal(false);
+      setPendingStatus(null);
+    }
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (deliveryStatus === "camino") {
+      const totalDuration = 10000; // 10 seconds for full path
+      const startTime = Date.now();
+      setDriverProgress(0);
+
+      interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = elapsed / totalDuration;
+
+        if (progress >= 1) {
+          setDriverProgress(1);
+          clearInterval(interval);
+        } else {
+          setDriverProgress(progress);
+        }
+      }, 50);
+    } else if (deliveryStatus === "recogida") {
+      setDriverProgress(0);
+    } else if (deliveryStatus === "entregado") {
+      setDriverProgress(1);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [deliveryStatus]);
+
+  // Puntos de la ruta para seguir la línea punteada (ajustados para seguir las calles)
+  const pathPoints = [
+    { x: 12, y: 14 }, // Inicio (Punto Naranja)
+    { x: 18, y: 20 },
+    { x: 30, y: 30 },
+    { x: 42, y: 42 },
+    { x: 55, y: 52 },
+    { x: 68, y: 60 },
+    { x: 78, y: 70 },
+    { x: 88, y: 82 }, // Fin (Casa)
+  ];
+
+  const totalSegments = pathPoints.length - 1;
+  let segmentIndex = Math.floor(driverProgress * totalSegments);
+  let segmentProgress = driverProgress * totalSegments - segmentIndex;
+
+  if (segmentIndex >= totalSegments) {
+    segmentIndex = totalSegments - 1;
+    segmentProgress = 1;
+  }
+
+  const startPoint = pathPoints[segmentIndex];
+  const endPoint = pathPoints[segmentIndex + 1];
+
+  const driverX = startPoint.x + (endPoint.x - startPoint.x) * segmentProgress;
+  const driverY = startPoint.y + (endPoint.y - startPoint.y) * segmentProgress;
+
+  // Calcular rotación
+  const dx = endPoint.x - startPoint.x;
+  const dy = endPoint.y - startPoint.y;
+  const rotation = Math.atan2(dy, dx) * (180 / Math.PI);
 
   if (showDeliveryTracking && selectedOrder) {
     return (
@@ -146,12 +222,23 @@ export default function Socio() {
             </h2>
 
             {/* Map */}
-            <div className="w-full aspect-[344/182] rounded-2xl overflow-hidden mb-6 shadow">
+            <div className="w-full aspect-[344/182] rounded-2xl overflow-hidden mb-6 shadow relative">
               <img
                 src="https://api.builder.io/api/v1/image/assets/TEMP/fab937c846a0c1022f5187555de5618832ff718a?width=688"
                 alt="Mapa de ruta"
                 className="w-full h-full object-cover"
               />
+              {/* Driver Marker */}
+              <div
+                className="absolute w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-75 ease-linear z-10"
+                style={{
+                  left: `${driverX}%`,
+                  top: `${driverY}%`,
+                  transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
+                }}
+              >
+                <Bike className="w-5 h-5 text-[#FF3C00]" />
+              </div>
             </div>
 
             {/* Client Name */}
@@ -288,6 +375,56 @@ export default function Socio() {
             </button>
           </div>
         </div>
+
+        {/* Confirmation Modal */}
+        {showConfirmModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+            <div className="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
+              <div className="flex justify-between items-center mb-4">
+                <h3
+                  className="text-xl font-bold text-black"
+                  style={{ fontFamily: "Montserrat" }}
+                >
+                  Confirmar Cambio
+                </h3>
+                <button
+                  onClick={() => setShowConfirmModal(false)}
+                  className="p-1 hover:bg-gray-100 rounded-full"
+                >
+                  <X className="w-6 h-6 text-gray-500" />
+                </button>
+              </div>
+              <p
+                className="text-gray-600 mb-6"
+                style={{ fontFamily: "Montserrat" }}
+              >
+                ¿Estás seguro de que deseas cambiar el estado del pedido a "
+                {pendingStatus === "recogida"
+                  ? "En punto de recogida"
+                  : pendingStatus === "camino"
+                    ? "En camino"
+                    : "Entregado"}
+                "?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowConfirmModal(false)}
+                  className="flex-1 py-3 rounded-xl border border-gray-300 text-gray-700 font-semibold hover:bg-gray-50"
+                  style={{ fontFamily: "Montserrat" }}
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={confirmStatusChange}
+                  className="flex-1 py-3 rounded-xl bg-[#FF3C00] text-white font-semibold hover:bg-[#E63B00]"
+                  style={{ fontFamily: "Montserrat" }}
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
