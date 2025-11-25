@@ -108,26 +108,7 @@ export function ProfileModal({
               </span>
             </button>
 
-            {/* Vender Repuesto (Agregar Producto) */}
-            <button
-              onClick={() => {
-                onClose();
-                navigate("/agregar-producto");
-              }}
-              className="w-full flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg transition-colors"
-            >
-              <div
-                className="w-[30px] h-[33px] rounded-full bg-cover bg-center flex-shrink-0 flex items-center justify-center bg-[#E32712]"
-              >
-                <span className="text-white text-xl font-bold">+</span>
-              </div>
-              <span
-                className="text-black text-lg font-semibold"
-                style={{ fontFamily: "Montserrat" }}
-              >
-                VENDER REPUESTO
-              </span>
-            </button>
+            {/* Vender Repuesto (Agregar Producto) - REMOVED but route exists */}
           </div>
 
           {/* Divider */}
