@@ -11,7 +11,7 @@ const defaultCenter = {
   lng: -74.0817,
 };
 
-const API_KEY = "AIzaSyCI4bHZu9RIlbo61rXS0vUXyBwpVCCVDDc";
+const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
 
 export default function MapComponent() {
   const { isLoaded } = useJsApiLoader({
