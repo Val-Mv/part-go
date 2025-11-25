@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { getUserProfile, clearUserProfile } from "@/lib/user-profile";
 import { ProfileModal } from "@/components/ProfileModal";
+import MapComponent from "@/components/MapComponent";
 
 type Order = {
   id: string;
@@ -26,6 +27,8 @@ type Order = {
   deliveryLocation: string;
   deliveryAddress: string;
   status?: "recogiendo" | "entregando" | "entregado";
+  pickupCoords?: { lat: number; lng: number };
+  deliveryCoords?: { lat: number; lng: number };
 };
 
 export default function Socio() {
@@ -79,6 +82,8 @@ export default function Socio() {
       pickupAddress: "Calle 5 # 100 -15",
       deliveryLocation: "Av. 20 #35 - 40",
       deliveryAddress: "Av. 20 #35 - 40",
+      pickupCoords: { lat: 4.6150, lng: -74.0850 },
+      deliveryCoords: { lat: 4.6050, lng: -74.0750 },
     },
     {
       id: "PRT-2025-007",
@@ -88,6 +93,8 @@ export default function Socio() {
       pickupAddress: "Calle 10 # 200 -30",
       deliveryLocation: "Cra. 19 #35 - 40",
       deliveryAddress: "Cra. 19 #35 - 40",
+      pickupCoords: { lat: 4.6180, lng: -74.0880 },
+      deliveryCoords: { lat: 4.6020, lng: -74.0720 },
     },
   ];
 
@@ -102,6 +109,8 @@ export default function Socio() {
       deliveryLocation: "Av. 20 #35 - 40",
       deliveryAddress: "Av. 20 #35 - 40",
       status: "recogiendo",
+      pickupCoords: { lat: 4.6150, lng: -74.0850 },
+      deliveryCoords: { lat: 4.6050, lng: -74.0750 },
     },
   ];
 
@@ -239,23 +248,12 @@ export default function Socio() {
             </h2>
 
             {/* Map */}
-            <div className="w-full aspect-[344/182] rounded-2xl overflow-hidden mb-6 shadow relative">
-              <img
-                src="https://api.builder.io/api/v1/image/assets/TEMP/fab937c846a0c1022f5187555de5618832ff718a?width=688"
-                alt="Mapa de ruta"
-                className="w-full h-full object-cover"
+            <div className="w-full aspect-[344/182] rounded-2xl overflow-hidden mb-6 shadow relative z-0">
+              <MapComponent 
+                pickupLocation={selectedOrder.pickupCoords}
+                deliveryLocation={selectedOrder.deliveryCoords}
+                showDirections={deliveryStatus === "camino"}
               />
-              {/* Driver Marker */}
-              <div
-                className="absolute w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-75 ease-linear z-10"
-                style={{
-                  left: `${driverX}%`,
-                  top: `${driverY}%`,
-                  transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                }}
-              >
-                <Bike className="w-5 h-5 text-[#FF3C00]" />
-              </div>
             </div>
 
             {/* Client Name */}
