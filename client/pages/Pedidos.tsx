@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Check, Phone, Bike } from "lucide-react";
 import { getUserProfile } from "@/lib/user-profile";
+import MapComponent from "@/components/MapComponent";
 
 interface Order {
   id: string;
@@ -56,27 +57,6 @@ export default function Pedidos() {
     if (showTracking) {
       setCurrentStep(0);
       setDriverProgress(0);
-
-      const totalDuration = 10000; // 10 seconds simulation
-      const startTime = Date.now();
-
-      const interval = setInterval(() => {
-        const elapsed = Date.now() - startTime;
-        const progress = Math.min(elapsed / totalDuration, 1);
-        setDriverProgress(progress);
-
-        if (progress < 0.1) {
-          setCurrentStep(0);
-        } else if (progress < 1) {
-          setCurrentStep(1);
-        } else {
-          setCurrentStep(2);
-        }
-
-        if (progress >= 1) clearInterval(interval);
-      }, 50);
-
-      return () => clearInterval(interval);
     }
   }, [showTracking]);
 
@@ -113,13 +93,10 @@ export default function Pedidos() {
   const startPoint = pathPoints[segmentIndex];
   const endPoint = pathPoints[segmentIndex + 1];
 
-  const driverX = startPoint.x + (endPoint.x - startPoint.x) * segmentProgress;
-  const driverY = startPoint.y + (endPoint.y - startPoint.y) * segmentProgress;
+  // Variables de simulación de movimiento (ya no se usan para el mapa real, pero se mantienen por si se requiere lógica futura)
+  // const driverX = startPoint.x + (endPoint.x - startPoint.x) * segmentProgress;
+  // const driverY = startPoint.y + (endPoint.y - startPoint.y) * segmentProgress;
 
-  // Calcular rotación para que la moto mire hacia adelante
-  const dx = endPoint.x - startPoint.x;
-  const dy = endPoint.y - startPoint.y;
-  const rotation = Math.atan2(dy, dx) * (180 / Math.PI);
 
   return (
     <div className="min-h-screen bg-partgo-hero flex flex-col items-center px-4 py-8">
@@ -152,23 +129,8 @@ export default function Pedidos() {
           /* Tracking View */
           <div className="space-y-6">
             {/* Map Container */}
-            <div className="w-full aspect-[331/252] rounded-2xl overflow-hidden shadow-lg relative">
-              <img
-                src="https://api.builder.io/api/v1/image/assets/TEMP/ff5b3f4cca2a069350bbe8a1d9ab3d458f03ff35?width=662"
-                alt="Mapa de entrega"
-                className="w-full h-full object-cover"
-              />
-              {/* Driver Marker */}
-              <div
-                className="absolute w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-75 ease-linear z-10"
-                style={{
-                  left: `${driverX}%`,
-                  top: `${driverY}%`,
-                  transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                }}
-              >
-                <Bike className="w-5 h-5 text-[#FF3C00]" />
-              </div>
+            <div className="w-full aspect-[331/252] rounded-2xl overflow-hidden shadow-lg relative z-0">
+              <MapComponent />
             </div>
 
             {/* Status Card */}
@@ -200,7 +162,7 @@ export default function Pedidos() {
               </div>
 
               {/* Driver Info Card */}
-              <div className="bg-white rounded-2xl p-4 shadow-md border border-gray-100 mb-6">
+              <div className="bg-white rounded-2xl p-4 shadow-md border border-gray-100 mb-6 relative">
                 <div className="flex items-center gap-4">
                   {/* Driver avatar */}
                   <div
@@ -235,6 +197,13 @@ export default function Pedidos() {
                       </p>
                     </div>
                   </div>
+
+                  {/* Hidden Update Button */}
+                  <button
+                    onClick={() => setCurrentStep((prev) => (prev + 1) % 3)}
+                    className="absolute right-0 top-0 bottom-0 w-16 bg-transparent z-20 opacity-0"
+                    aria-label="Update Status"
+                  />
                 </div>
               </div>
 
