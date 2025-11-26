@@ -38,6 +38,13 @@ const products = [
     image:
       "https://api.builder.io/api/v1/image/assets/TEMP/d18aa3f62ccfe3b68f1195acadf2e8d5bd1c1899?width=286",
   },
+  {
+    id: 5,
+    name: "ESPEJO RETROVISOR ALERON",
+    price: "$65.610",
+    type: "GENERICO",
+    image: "/aleron.jpeg",
+  },
 ];
 
 const app: Express = express();
